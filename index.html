@@ -1,43 +1,106 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guido Kindwerley</title>
-  <style>
-    :root{--bg:#030303;--fg:#f3f0ea;--muted:rgba(243,240,234,.48)}
-    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--fg)}
-    #scene{position:fixed;inset:0;width:100%;height:100%;display:block;background:radial-gradient(circle at 50% 45%,#111 0%,#060606 34%,#000 100%)}
-    .grain{position:fixed;inset:-50%;pointer-events:none;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");animation:grain 9s steps(8) infinite;mix-blend-mode:screen}
-    .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.06),transparent 26%),radial-gradient(circle at center,transparent 35%,rgba(0,0,0,.76) 100%)}
-    .content{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center;padding:24px;animation:intro 1800ms cubic-bezier(.2,.8,.2,1) both}
-    .name{font-size:clamp(32px,7.5vw,96px);font-weight:300;letter-spacing:clamp(.18em,1vw,.38em);line-height:1;text-transform:uppercase;text-shadow:0 0 38px rgba(255,255,255,.11);margin-left:clamp(6px,1vw,28px);position:relative}
-    .name::after{content:"";position:absolute;inset:-20% -8%;background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.0) 38%,rgba(255,255,255,.28) 50%,rgba(255,255,255,.0) 62%,transparent 100%);transform:translateX(-130%);animation:sheen 7s ease-in-out 2.2s infinite;mix-blend-mode:screen}
-    .role{margin-top:22px;color:var(--muted);font-size:clamp(11px,1.3vw,15px);letter-spacing:.42em;text-transform:uppercase;font-weight:300;opacity:.9}
-    @keyframes intro{0%{opacity:0;filter:blur(18px);transform:translateY(14px) scale(.985)}100%{opacity:1;filter:blur(0);transform:none}}
-    @keyframes sheen{0%,55%{transform:translateX(-130%)}82%,100%{transform:translateX(130%)}}
-    @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-10%)}30%{transform:translate(8%,4%)}50%{transform:translate(-3%,9%)}70%{transform:translate(9%,-6%)}90%{transform:translate(-7%,3%)}}
-    @media (prefers-reduced-motion:reduce){.content,.name::after,.grain{animation:none}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Guido Kindwerley</title>
+<style>
+  :root{--bg:#020304;--fg:#f4f2ec;--muted:rgba(244,242,236,.56)}
+  *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--fg)}
+  canvas{position:fixed;inset:0;width:100%;height:100%;display:block;background:radial-gradient(circle at 50% 45%,#101217 0%,#050608 42%,#020304 100%)}
+  .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center,transparent 0%,transparent 44%,rgba(0,0,0,.72) 100%)}
+  .hero{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center;padding:24px;mix-blend-mode:screen}
+  h1{margin:0;font-weight:300;letter-spacing:.34em;font-size:clamp(28px,5.2vw,72px);line-height:1.05;text-indent:.34em;text-shadow:0 0 28px rgba(255,255,255,.18);animation:focusIn 1.6s cubic-bezier(.2,.9,.2,1) both}
+  p{margin:18px 0 0;font-weight:300;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:var(--muted);font-size:clamp(10px,1.15vw,14px);animation:rise .9s ease both;animation-delay:1.05s}
+  .grain{position:fixed;inset:-20%;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 7s steps(6) infinite}
+  @keyframes focusIn{0%{opacity:0;filter:blur(14px);transform:translateY(14px) scale(.985)}100%{opacity:1;filter:blur(0);transform:none}}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes grain{to{transform:translate3d(-8%,6%,0)}}
+</style>
 </head>
 <body>
-  <canvas id="scene" aria-hidden="true"></canvas>
-  <main class="content" aria-label="Guido Kindwerley"><div><h1 class="name">Guido Kindwerley</h1><div class="role">Founder · Pilot · Builder</div></div></main>
-  <div class="grain"></div><div class="vignette"></div>
-  <script>
-  (()=>{const canvas=document.getElementById('scene'),ctx=canvas.getContext('2d',{alpha:false});let w,h,dpr,particles=[],mouse={x:.5,y:.5,tx:.5,ty:.5,last:0};
-  const prefersReduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function resize(){dpr=Math.min(devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);init();}
-  function init(){const count=Math.min(950,Math.max(360,Math.floor((w*h)/1600)));particles=Array.from({length:count},(_,i)=>{const z=Math.random();return{x:Math.random()*w,y:Math.random()*h,z,vx:(Math.random()-.5)*(0.08+z*.22),vy:(Math.random()-.5)*(0.08+z*.22),r:(0.35+z*1.45)*(w<700?.72:1),a:.18+z*.58,phase:Math.random()*Math.PI*2};});}
-  addEventListener('resize',resize);addEventListener('pointermove',e=>{mouse.tx=e.clientX/w;mouse.ty=e.clientY/h;mouse.last=performance.now();document.documentElement.style.setProperty('--mx',e.clientX+'px');document.documentElement.style.setProperty('--my',e.clientY+'px');},{passive:true});
-  function draw(t){requestAnimationFrame(draw);mouse.x+=(mouse.tx-mouse.x)*0.035;mouse.y+=(mouse.ty-mouse.y)*0.035;ctx.fillStyle='#030303';ctx.fillRect(0,0,w,h);const cx=w*.5,cy=h*.5,px=(mouse.x-.5)*26,py=(mouse.y-.5)*22,active=Math.max(0,1-(performance.now()-mouse.last)/2600);
-    const grad=ctx.createRadialGradient(cx+px*3,cy+py*3,0,cx,cy,Math.max(w,h)*.72);grad.addColorStop(0,'#151515');grad.addColorStop(.52,'#050505');grad.addColorStop(1,'#000');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
-    for(const p of particles){const depth=.25+p.z*.95;let dx=(p.x-cx),dy=(p.y-cy);const mx=(mouse.x*w-p.x),my=(mouse.y*h-p.y),dist=Math.hypot(mx,my)+1,force=active*Math.min(1,120/dist)*(.35+p.z*.9);p.x+=p.vx+Math.sin(t*.00025+p.phase)*0.05+(-mx/dist)*force*.18;p.y+=p.vy+Math.cos(t*.00022+p.phase)*0.05+(-my/dist)*force*.18;if(p.x<-40)p.x=w+40;if(p.x>w+40)p.x=-40;if(p.y<-40)p.y=h+40;if(p.y>h+40)p.y=-40;p.sx=cx+dx*(.92+depth*.1)+px*p.z;p.sy=cy+dy*(.92+depth*.1)+py*p.z;}
-    ctx.lineWidth=.45;for(let i=0;i<particles.length;i+=1){const a=particles[i]; if(i%2!==0) continue; for(let j=i+1;j<Math.min(particles.length,i+42);j+=3){const b=particles[j];const dd=Math.hypot(a.sx-b.sx,a.sy-b.sy); if(dd<78*(.45+a.z)){const alpha=(1-dd/(78*(.45+a.z)))*.16*Math.min(a.z,b.z);ctx.strokeStyle=`rgba(245,242,235,${alpha})`;ctx.beginPath();ctx.moveTo(a.sx,a.sy);ctx.lineTo(b.sx,b.sy);ctx.stroke();}}}
-    for(const p of particles){const pulse=(Math.sin(t*.001+p.phase)+1)*.5;ctx.beginPath();ctx.fillStyle=`rgba(245,242,235,${p.a*(.45+p.z*.55)})`;ctx.shadowBlur=12*p.z;ctx.shadowColor='rgba(245,242,235,.22)';ctx.arc(p.sx,p.sy,p.r*(.8+pulse*.35),0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;}
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="grain"></div><div class="vignette"></div>
+<main class="hero"><div><h1>GUIDO KINDWERLEY</h1><p>Founder · Pilot · Builder</p></div></main>
+<script>
+(() => {
+  const canvas = document.getElementById('scene');
+  const ctx = canvas.getContext('2d', { alpha:false });
+  let w=0,h=0,dpr=1,particles=[],t=0;
+  const pointer={x:0,y:0,tx:0,ty:0,active:false};
+  const isMobile = matchMedia('(max-width: 700px)').matches;
+  const count = isMobile ? 180 : 420;
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    w=innerWidth; h=innerHeight;
+    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
+    canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
+    init();
   }
-  resize();requestAnimationFrame(draw);
-  })();
-  </script>
+  function init(){
+    particles=[];
+    for(let i=0;i<count;i++){
+      const z=Math.random();
+      particles.push({
+        x:(Math.random()-.5)*w*1.8,
+        y:(Math.random()-.5)*h*1.8,
+        z,
+        r:.45+z*1.65,
+        a:.12+z*.72,
+        vx:(Math.random()-.5)*(0.08+z*.16),
+        vy:(Math.random()-.5)*(0.08+z*.16),
+        phase:Math.random()*Math.PI*2
+      });
+    }
+  }
+  function project(p){
+    const depth=.42+p.z*1.28;
+    const cx=w/2 + pointer.x*(10+42*p.z);
+    const cy=h/2 + pointer.y*(7+34*p.z);
+    return {x:cx+p.x*depth,y:cy+p.y*depth,s:depth};
+  }
+  function frame(){
+    t+=0.012;
+    pointer.x += (pointer.tx-pointer.x)*0.045; pointer.y += (pointer.ty-pointer.y)*0.045;
+    ctx.fillStyle='#020304'; ctx.fillRect(0,0,w,h);
+    const g=ctx.createRadialGradient(w*(.5+pointer.x*.08),h*(.45+pointer.y*.08),0,w/2,h/2,Math.max(w,h)*.72);
+    g.addColorStop(0,'#11141a'); g.addColorStop(.42,'#050608'); g.addColorStop(1,'#020304');
+    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    const pts=[];
+    for(const p of particles){
+      p.x += p.vx + Math.sin(t+p.phase)*0.035*p.z;
+      p.y += p.vy + Math.cos(t*.9+p.phase)*0.025*p.z;
+      if(p.x>w) p.x=-w; if(p.x<-w) p.x=w; if(p.y>h) p.y=-h; if(p.y<-h) p.y=h;
+      const pr=project(p); pts.push({...pr,p});
+    }
+    ctx.lineWidth=1;
+    for(let i=0;i<pts.length;i++){
+      const a=pts[i]; if(a.p.z<.25) continue;
+      for(let j=i+1;j<Math.min(pts.length,i+22);j++){
+        const b=pts[j], dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
+        const limit=70+(a.p.z+b.p.z)*28;
+        if(dist<limit){
+          const alpha=(1-dist/limit)*.17*Math.min(a.p.z,b.p.z);
+          ctx.strokeStyle=`rgba(244,242,236,${alpha})`;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for(const a of pts){
+      const twinkle=(Math.sin(t*2+a.p.phase)+1)*.5;
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(244,242,236,${a.p.a*(.48+twinkle*.35)})`;
+      ctx.arc(a.x,a.y,a.p.r*a.s,0,Math.PI*2); ctx.fill();
+    }
+    // foreground drifting particles
+    ctx.fillStyle='rgba(255,255,255,.55)';
+    requestAnimationFrame(frame);
+  }
+  addEventListener('mousemove',e=>{pointer.active=true;pointer.tx=(e.clientX/w-.5);pointer.ty=(e.clientY/h-.5);});
+  addEventListener('touchmove',e=>{const q=e.touches[0]; if(q){pointer.tx=(q.clientX/w-.5);pointer.ty=(q.clientY/h-.5)}},{passive:true});
+  addEventListener('resize',resize,{passive:true});
+  resize(); frame();
+})();
+</script>
 </body>
 </html>
