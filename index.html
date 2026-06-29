@@ -5,122 +5,231 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Guido Kindwerley</title>
   <meta name="description" content="Guido Kindwerley — Founder · Pilot · Builder" />
+  <meta name="theme-color" content="#050608" />
   <meta property="og:title" content="Guido Kindwerley" />
   <meta property="og:description" content="Founder · Pilot · Builder" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kindwerley.com" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050505'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial, Helvetica, sans-serif' font-size='26' letter-spacing='-2' fill='white'%3EGK%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050608'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='25' fill='white' letter-spacing='-1'%3EGK%3C/text%3E%3C/svg%3E" />
   <style>
-    :root{
-      --bg:#020304; --text:#f4f4f1; --muted:rgba(244,244,241,.42);
+    :root {
+      --white: rgba(246, 248, 250, .94);
+      --muted: rgba(246, 248, 250, .44);
+      --faint: rgba(246, 248, 250, .16);
     }
-    *{box-sizing:border-box} html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;color:var(--text)}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
-      radial-gradient(circle at 50% 45%, rgba(255,255,255,.13), transparent 31%),
-      radial-gradient(circle at 18% 12%, rgba(255,255,255,.045), transparent 24%),
-      radial-gradient(circle at 82% 84%, rgba(255,255,255,.035), transparent 30%),
-      linear-gradient(180deg,#050607 0%,#010202 100%);}
-    body:after{content:"";position:fixed;inset:-30%;pointer-events:none;opacity:.11;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");animation:grain 9s steps(8) infinite;}
-    @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,2%)}20%{transform:translate(2%,-2%)}30%{transform:translate(-2%,3%)}40%{transform:translate(3%,1%)}50%{transform:translate(-1%,-3%)}60%{transform:translate(2%,3%)}70%{transform:translate(-3%,-1%)}80%{transform:translate(1%,2%)}90%{transform:translate(3%,-3%)}}
-    canvas{position:fixed;inset:0;width:100%;height:100%;display:block;filter:contrast(1.08) saturate(.9)}
-    .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center, transparent 0 44%, rgba(0,0,0,.55) 82%, rgba(0,0,0,.82) 100%)}
-    .light{position:fixed;inset:-20%;pointer-events:none;background:radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.095), transparent 18%, transparent 100%);filter:blur(12px);opacity:.85;transition:opacity .4s ease;}
-    main{position:relative;z-index:2;height:100%;display:grid;place-items:center;padding:24px;text-align:center;transform:translate3d(calc(var(--mx,0)*-10px),calc(var(--my,0)*-7px),0)}
-    .mark{animation:enter 1800ms cubic-bezier(.2,.8,.2,1) both;}
-    h1{margin:0;font-weight:200;letter-spacing:.34em;font-size:clamp(2.35rem,6vw,6.25rem);line-height:1.05;text-transform:uppercase;text-shadow:0 0 30px rgba(255,255,255,.10), 0 0 80px rgba(255,255,255,.055);white-space:nowrap;}
-    .rule{width:min(180px,20vw);height:1px;margin:22px auto 18px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);opacity:.45;}
-    p{margin:0;color:var(--muted);font-size:clamp(.58rem,.78vw,.78rem);letter-spacing:.62em;text-transform:uppercase;font-weight:400;}
-    .signature{position:fixed;left:22px;bottom:18px;z-index:3;color:rgba(255,255,255,.24);font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:0;animation:fade 1.4s ease 1.8s forwards;}
-    @keyframes enter{0%{opacity:0;filter:blur(18px);transform:translateY(14px) scale(.985)}55%{opacity:1;filter:blur(2px)}100%{opacity:1;filter:blur(0);transform:none}}
-    @keyframes fade{to{opacity:1}}
-    @media (max-width:700px){h1{font-size:clamp(2rem,10vw,3.5rem);letter-spacing:.18em;white-space:normal}.rule{margin-top:18px}p{letter-spacing:.38em}.signature{display:none}}
-    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; overflow: hidden; background: #020304; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--white);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+    .grain {
+      position: fixed; inset: -20%; pointer-events: none; opacity: .055; mix-blend-mode: screen;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      animation: driftGrain 9s steps(10) infinite;
+    }
+    @keyframes driftGrain { 0% { transform: translate3d(0,0,0)} 100% { transform: translate3d(-8%,4%,0)} }
+    .vignette {
+      position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at center, transparent 0%, transparent 38%, rgba(0,0,0,.35) 68%, rgba(0,0,0,.86) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,.4), transparent 30%, transparent 70%, rgba(0,0,0,.52));
+    }
+    .hero {
+      position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none;
+      transform: translate3d(0, 0, 0);
+    }
+    .mark { text-align: center; padding: 0 5vw; opacity: 0; filter: blur(18px); transform: translateY(10px) scale(.992); animation: reveal 2.4s cubic-bezier(.2,.8,.1,1) .35s forwards; }
+    @keyframes reveal { to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); } }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.15rem, 6.3vw, 6.8rem);
+      line-height: 1;
+      font-weight: 280;
+      letter-spacing: clamp(.42rem, 1.32vw, 1.35rem);
+      text-transform: uppercase;
+      text-shadow: 0 0 24px rgba(255,255,255,.09), 0 0 90px rgba(190,210,255,.08);
+      white-space: nowrap;
+    }
+    .subtitle {
+      margin-top: clamp(1rem, 2.2vw, 1.55rem);
+      font-size: clamp(.58rem, .86vw, .82rem);
+      letter-spacing: clamp(.22rem, .55vw, .52rem);
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 500;
+      animation: breatheText 6s ease-in-out infinite;
+    }
+    @keyframes breatheText { 0%,100% { opacity: .62 } 50% { opacity: .92 } }
+    .line {
+      width: min(280px, 44vw); height: 1px; margin: clamp(.9rem, 1.7vw, 1.2rem) auto 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.34), transparent);
+      opacity: .45;
+    }
+    .corner {
+      position: fixed; color: rgba(255,255,255,.22); font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
+      bottom: 28px; left: 50%; transform: translateX(-50%); opacity: .65; pointer-events:none;
+    }
+    @media (max-width: 680px) {
+      h1 { font-size: clamp(1.55rem, 8.5vw, 2.65rem); letter-spacing: clamp(.18rem, 1.9vw, .45rem); white-space: normal; }
+      .subtitle { letter-spacing: .22rem; font-size: .56rem; }
+      .corner { display:none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .grain, .mark, .subtitle { animation: none; opacity: 1; filter: none; transform:none; } }
   </style>
 </head>
 <body>
-  <canvas id="space"></canvas>
-  <div class="light" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-  <main>
-    <section class="mark" aria-label="Guido Kindwerley">
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <main class="hero" aria-label="Guido Kindwerley">
+    <section class="mark">
       <h1>Guido Kindwerley</h1>
-      <div class="rule"></div>
-      <p>Founder · Pilot · Builder</p>
+      <div class="line"></div>
+      <div class="subtitle">Founder · Pilot · Builder</div>
     </section>
   </main>
-  <div class="signature">© 2026</div>
-<script>
-(() => {
-  const canvas = document.getElementById('space');
-  const ctx = canvas.getContext('2d', { alpha: true });
-  const root = document.documentElement;
-  let w=0,h=0,dpr=1,cx=0,cy=0;
-  let mx=0,my=0, tx=0,ty=0;
-  const particles=[];
-  const layers=[
-    {count:145, size:[.28,.72], speed:.065, alpha:.18, z:.34},
-    {count:120, size:[.42,1.05], speed:.125, alpha:.36, z:.70},
-    {count:64, size:[.72,1.75], speed:.22, alpha:.56, z:1.12},
-    {count:18, size:[1.15,2.45], speed:.34, alpha:.62, z:1.55}
-  ];
-  function resize(){
-    dpr=Math.min(window.devicePixelRatio||1,2.6); w=innerWidth; h=innerHeight; cx=w/2; cy=h/2;
-    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr); canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(!particles.length) init();
-  }
-  function rand(a,b){return a+Math.random()*(b-a)}
-  function init(){
-    for(const L of layers){
-      for(let i=0;i<L.count;i++) particles.push({
-        x:rand(-w*.08,w*1.08), y:rand(-h*.08,h*1.08), ox:0, oy:0,
-        r:rand(L.size[0],L.size[1]), vx:rand(-L.speed,L.speed), vy:rand(-L.speed,L.speed),
-        a:rand(L.alpha*.35,L.alpha), z:L.z, phase:rand(0,Math.PI*2), pulse:rand(.003,.009)
-      });
-    }
-  }
-  function pointer(e){
-    const x=(e.touches?e.touches[0].clientX:e.clientX), y=(e.touches?e.touches[0].clientY:e.clientY);
-    tx=(x-cx)/cx; ty=(y-cy)/cy;
-    root.style.setProperty('--x', x+'px'); root.style.setProperty('--y', y+'px');
-  }
-  addEventListener('mousemove', pointer, {passive:true}); addEventListener('touchmove', pointer, {passive:true}); addEventListener('resize', resize);
-  function draw(t){
-    mx += (tx-mx)*.055; my += (ty-my)*.055;
-    root.style.setProperty('--mx', mx.toFixed(4)); root.style.setProperty('--my', my.toFixed(4));
-    ctx.clearRect(0,0,w,h);
-    const time=t*.001;
-    // soft cinematic beams
-    const g=ctx.createRadialGradient(cx+mx*90, cy+my*70, 0, cx+mx*90, cy+my*70, Math.max(w,h)*.62);
-    g.addColorStop(0,'rgba(255,255,255,.055)'); g.addColorStop(.35,'rgba(255,255,255,.018)'); g.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-    for(const p of particles){
-      const driftX=Math.sin(time*.38+p.phase)*.16*p.z;
-      const driftY=Math.cos(time*.31+p.phase)*.13*p.z;
-      p.x += p.vx + driftX; p.y += p.vy + driftY;
-      if(p.x<-80) p.x=w+80; if(p.x>w+80) p.x=-80; if(p.y<-80) p.y=h+80; if(p.y>h+80) p.y=-80;
-      const dx=p.x-(cx+mx*120), dy=p.y-(cy+my*90); const dist=Math.sqrt(dx*dx+dy*dy); const influence=Math.max(0,1-dist/260);
-      const warp=influence*26*p.z;
-      p.ox=(dx/(dist||1))*warp; p.oy=(dy/(dist||1))*warp;
-      const x=p.x+p.ox+mx*18*p.z, y=p.y+p.oy+my*12*p.z;
-      const twinkle=.65+Math.sin(time*2.2+p.phase)*.35;
-      ctx.beginPath(); ctx.arc(x,y,p.r*(1+influence*.7),0,Math.PI*2);
-      ctx.fillStyle=`rgba(245,245,240,${p.a*twinkle*(.75+influence*.55)})`; ctx.fill();
-    }
-    // ephemeral connections only around center, ultra thin
-    ctx.lineWidth=.45;
-    for(let i=0;i<particles.length;i++){
-      const a=particles[i]; if(a.z<.7) continue;
-      for(let j=i+1;j<particles.length;j++){
-        const b=particles[j]; if(b.z<.7) continue;
-        const ax=a.x+a.ox+mx*18*a.z, ay=a.y+a.oy+my*12*a.z, bx=b.x+b.ox+mx*18*b.z, by=b.y+b.oy+my*12*b.z;
-        const dx=ax-bx, dy=ay-by, dd=dx*dx+dy*dy;
-        if(dd<9800){ const alpha=(1-Math.sqrt(dd)/112)*.085; ctx.strokeStyle=`rgba(245,245,240,${alpha})`; ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke(); }
+  <div class="corner">Kindwerley.com</div>
+  <script>
+    (() => {
+      const canvas = document.getElementById('space');
+      const ctx = canvas.getContext('2d', { alpha: false });
+      let w = 0, h = 0, dpr = 1, cx = 0, cy = 0;
+      let particles = [];
+      let t = 0;
+      const mouse = { x: 0, y: 0, tx: 0, ty: 0, active: false };
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function resize() {
+        dpr = Math.min(devicePixelRatio || 1, 2.35);
+        w = innerWidth; h = innerHeight; cx = w / 2; cy = h / 2;
+        canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        build();
       }
-    }
-    requestAnimationFrame(draw);
-  }
-  resize(); requestAnimationFrame(draw);
-})();
-</script>
+
+      function build() {
+        const area = w * h;
+        const base = Math.round(Math.min(2600, Math.max(850, area / 1150)));
+        particles = [];
+        for (let i = 0; i < base; i++) {
+          const layerPick = Math.random();
+          const z = layerPick < .62 ? Math.random() * .45 + .05 : layerPick < .91 ? Math.random() * .3 + .5 : Math.random() * .2 + .8;
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            z,
+            r: (Math.random() * 0.9 + 0.22) * (0.55 + z * 1.15),
+            a: (Math.random() * 0.42 + 0.08) * (0.45 + z * .9),
+            vx: (Math.random() - .5) * (0.06 + z * .14),
+            vy: (Math.random() - .5) * (0.04 + z * .11),
+            phase: Math.random() * Math.PI * 2,
+            tw: Math.random() * .018 + .004,
+            hue: Math.random() < .16 ? 'blue' : Math.random() < .18 ? 'warm' : 'white'
+          });
+        }
+      }
+
+      addEventListener('pointermove', e => { mouse.tx = (e.clientX - cx) / cx; mouse.ty = (e.clientY - cy) / cy; mouse.active = true; }, { passive: true });
+      addEventListener('pointerleave', () => { mouse.tx = 0; mouse.ty = 0; mouse.active = false; });
+      addEventListener('resize', resize);
+
+      function bg() {
+        const gx = cx + mouse.x * 70, gy = cy + mouse.y * 55;
+        const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(w,h) * .78);
+        g.addColorStop(0, '#101820');
+        g.addColorStop(.18, '#090d11');
+        g.addColorStop(.52, '#030506');
+        g.addColorStop(1, '#010101');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
+
+        const halo = ctx.createRadialGradient(cx + mouse.x * 110, cy + 12 + mouse.y * 75, 0, cx + mouse.x * 110, cy + 12 + mouse.y * 75, Math.min(w,h) * .52);
+        halo.addColorStop(0, 'rgba(210,226,255,.115)');
+        halo.addColorStop(.26, 'rgba(138,165,205,.055)');
+        halo.addColorStop(.62, 'rgba(70,90,115,.018)');
+        halo.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = halo;
+        ctx.fillRect(0,0,w,h);
+      }
+
+      function color(p, alphaMul=1) {
+        const a = Math.max(0, Math.min(1, p.a * alphaMul));
+        if (p.hue === 'blue') return `rgba(185,210,255,${a})`;
+        if (p.hue === 'warm') return `rgba(255,238,215,${a})`;
+        return `rgba(246,248,250,${a})`;
+      }
+
+      function draw(now) {
+        t = now * 0.001;
+        mouse.x += (mouse.tx - mouse.x) * .045;
+        mouse.y += (mouse.ty - mouse.y) * .045;
+        bg();
+
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        const mx = cx + mouse.x * cx, my = cy + mouse.y * cy;
+        for (const p of particles) {
+          if (!reduce) {
+            p.x += p.vx + Math.sin(t * .23 + p.phase) * .012 * p.z;
+            p.y += p.vy + Math.cos(t * .19 + p.phase) * .01 * p.z;
+            if (p.x < -20) p.x = w + 20; if (p.x > w + 20) p.x = -20;
+            if (p.y < -20) p.y = h + 20; if (p.y > h + 20) p.y = -20;
+          }
+          const parx = mouse.x * (30 * p.z - 10), pary = mouse.y * (24 * p.z - 8);
+          let x = p.x + parx, y = p.y + pary;
+          const dx = x - mx, dy = y - my; const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 180 && !reduce) {
+            const force = (1 - dist / 180) * 10 * p.z;
+            x += dx / (dist || 1) * force; y += dy / (dist || 1) * force;
+          }
+          const twinkle = .72 + Math.sin(t * (1.1 + p.tw * 20) + p.phase) * .28;
+          const blur = p.z > .82 ? 5.5 : p.z < .18 ? 1.8 : 0;
+          if (blur) ctx.shadowBlur = blur;
+          ctx.shadowColor = color(p, .95);
+          ctx.fillStyle = color(p, twinkle);
+          ctx.beginPath(); ctx.arc(x, y, p.r, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.restore();
+
+        // Sparse living connections around the title area only, subtle and expensive-looking.
+        ctx.save();
+        ctx.globalCompositeOperation = 'screen';
+        ctx.lineWidth = .55;
+        const mid = particles.filter(p => p.z > .38 && p.z < .76 && Math.abs((p.y + mouse.y * 16) - cy) < h * .28);
+        for (let i = 0; i < Math.min(mid.length, 260); i++) {
+          const a = mid[i];
+          const ax = a.x + mouse.x * (30 * a.z - 10), ay = a.y + mouse.y * (24 * a.z - 8);
+          for (let j = i + 1; j < Math.min(mid.length, i + 18); j++) {
+            const b = mid[j];
+            const bx = b.x + mouse.x * (30 * b.z - 10), by = b.y + mouse.y * (24 * b.z - 8);
+            const dx = ax - bx, dy = ay - by, dd = dx*dx + dy*dy;
+            if (dd < 92*92) {
+              const alpha = (1 - Math.sqrt(dd)/92) * .075;
+              ctx.strokeStyle = `rgba(220,232,255,${alpha})`;
+              ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+            }
+          }
+        }
+        ctx.restore();
+
+        // Cinematic scan glint, almost invisible.
+        const sweep = (Math.sin(t * .16) * .5 + .5) * (w + 500) - 250;
+        const lg = ctx.createLinearGradient(sweep - 160, 0, sweep + 160, h);
+        lg.addColorStop(0, 'rgba(255,255,255,0)');
+        lg.addColorStop(.48, 'rgba(230,240,255,.018)');
+        lg.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = lg; ctx.fillRect(0,0,w,h);
+
+        requestAnimationFrame(draw);
+      }
+      resize();
+      requestAnimationFrame(draw);
+    })();
+  </script>
 </body>
 </html>
