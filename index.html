@@ -16,11 +16,11 @@
     }
     *{box-sizing:border-box} html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;color:var(--text)}
     body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
-      radial-gradient(circle at 50% 45%, rgba(255,255,255,.105), transparent 28%),
+      radial-gradient(circle at 50% 45%, rgba(255,255,255,.13), transparent 31%),
       radial-gradient(circle at 18% 12%, rgba(255,255,255,.045), transparent 24%),
       radial-gradient(circle at 82% 84%, rgba(255,255,255,.035), transparent 30%),
       linear-gradient(180deg,#050607 0%,#010202 100%);}
-    body:after{content:"";position:fixed;inset:-30%;pointer-events:none;opacity:.17;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");animation:grain 9s steps(8) infinite;}
+    body:after{content:"";position:fixed;inset:-30%;pointer-events:none;opacity:.11;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");animation:grain 9s steps(8) infinite;}
     @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,2%)}20%{transform:translate(2%,-2%)}30%{transform:translate(-2%,3%)}40%{transform:translate(3%,1%)}50%{transform:translate(-1%,-3%)}60%{transform:translate(2%,3%)}70%{transform:translate(-3%,-1%)}80%{transform:translate(1%,2%)}90%{transform:translate(3%,-3%)}}
     canvas{position:fixed;inset:0;width:100%;height:100%;display:block;filter:contrast(1.08) saturate(.9)}
     .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center, transparent 0 44%, rgba(0,0,0,.55) 82%, rgba(0,0,0,.82) 100%)}
@@ -58,9 +58,10 @@
   let mx=0,my=0, tx=0,ty=0;
   const particles=[];
   const layers=[
-    {count:72, size:[.35,.9], speed:.08, alpha:.20, z:.38},
-    {count:58, size:[.55,1.35], speed:.16, alpha:.42, z:.75},
-    {count:22, size:[.9,2.15], speed:.29, alpha:.62, z:1.25}
+    {count:145, size:[.28,.72], speed:.065, alpha:.18, z:.34},
+    {count:120, size:[.42,1.05], speed:.125, alpha:.36, z:.70},
+    {count:64, size:[.72,1.75], speed:.22, alpha:.56, z:1.12},
+    {count:18, size:[1.15,2.45], speed:.34, alpha:.62, z:1.55}
   ];
   function resize(){
     dpr=Math.min(window.devicePixelRatio||1,2.6); w=innerWidth; h=innerHeight; cx=w/2; cy=h/2;
@@ -113,7 +114,7 @@
         const b=particles[j]; if(b.z<.7) continue;
         const ax=a.x+a.ox+mx*18*a.z, ay=a.y+a.oy+my*12*a.z, bx=b.x+b.ox+mx*18*b.z, by=b.y+b.oy+my*12*b.z;
         const dx=ax-bx, dy=ay-by, dd=dx*dx+dy*dy;
-        if(dd<12500){ const alpha=(1-Math.sqrt(dd)/112)*.11; ctx.strokeStyle=`rgba(245,245,240,${alpha})`; ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke(); }
+        if(dd<9800){ const alpha=(1-Math.sqrt(dd)/112)*.085; ctx.strokeStyle=`rgba(245,245,240,${alpha})`; ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke(); }
       }
     }
     requestAnimationFrame(draw);
