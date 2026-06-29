@@ -1,106 +1,111 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Guido Kindwerley</title>
-<style>
-  :root{--bg:#020304;--fg:#f4f2ec;--muted:rgba(244,242,236,.56)}
-  *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--fg)}
-  canvas{position:fixed;inset:0;width:100%;height:100%;display:block;background:radial-gradient(circle at 50% 45%,#101217 0%,#050608 42%,#020304 100%)}
-  .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center,transparent 0%,transparent 44%,rgba(0,0,0,.72) 100%)}
-  .hero{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center;padding:24px;mix-blend-mode:screen}
-  h1{margin:0;font-weight:300;letter-spacing:.34em;font-size:clamp(28px,5.2vw,72px);line-height:1.05;text-indent:.34em;text-shadow:0 0 28px rgba(255,255,255,.18);animation:focusIn 1.6s cubic-bezier(.2,.9,.2,1) both}
-  p{margin:18px 0 0;font-weight:300;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:var(--muted);font-size:clamp(10px,1.15vw,14px);animation:rise .9s ease both;animation-delay:1.05s}
-  .grain{position:fixed;inset:-20%;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 7s steps(6) infinite}
-  @keyframes focusIn{0%{opacity:0;filter:blur(14px);transform:translateY(14px) scale(.985)}100%{opacity:1;filter:blur(0);transform:none}}
-  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  @keyframes grain{to{transform:translate3d(-8%,6%,0)}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guido Kindwerley</title>
+  <meta name="description" content="Guido Kindwerley" />
+  <style>
+    :root{--bg:#050506;--fg:#f3f2ee;--muted:rgba(243,242,238,.52)}
+    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--fg)}
+    body:before{content:"";position:fixed;inset:-20%;background:radial-gradient(circle at 50% 46%,rgba(255,255,255,.12),rgba(255,255,255,.035) 22%,transparent 55%),radial-gradient(circle at 18% 30%,rgba(255,255,255,.06),transparent 35%);filter:blur(18px);pointer-events:none}
+    canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+    .hero{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center;padding:24px;opacity:0;animation:arrive 1.8s cubic-bezier(.2,.8,.2,1) .35s forwards;filter:blur(10px)}
+    h1{margin:0;font-weight:200;letter-spacing:.25em;font-size:clamp(2.35rem,6vw,6.2rem);line-height:1.04;text-shadow:0 0 34px rgba(255,255,255,.16)}
+    .line{width:min(240px,38vw);height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.44),transparent);margin:26px auto 18px;opacity:.65}
+    p{margin:0;font-size:clamp(.56rem,1.1vw,.82rem);letter-spacing:.68em;text-transform:uppercase;color:var(--muted);font-weight:500}
+    .grain{position:fixed;inset:0;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");mix-blend-mode:screen}
+    @keyframes arrive{to{opacity:1;filter:blur(0)}}
+    @media (max-width:720px){h1{letter-spacing:.14em}.line{margin:20px auto 15px}p{letter-spacing:.38em}}
+  </style>
 </head>
 <body>
-<canvas id="scene" aria-hidden="true"></canvas>
-<div class="grain"></div><div class="vignette"></div>
-<main class="hero"><div><h1>GUIDO KINDWERLEY</h1><p>Founder · Pilot · Builder</p></div></main>
-<script>
-(() => {
-  const canvas = document.getElementById('scene');
-  const ctx = canvas.getContext('2d', { alpha:false });
-  let w=0,h=0,dpr=1,particles=[],t=0;
-  const pointer={x:0,y:0,tx:0,ty:0,active:false};
-  const isMobile = matchMedia('(max-width: 700px)').matches;
-  const count = isMobile ? 180 : 420;
-  function resize(){
-    dpr=Math.min(devicePixelRatio||1,2);
-    w=innerWidth; h=innerHeight;
-    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
-    canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
-    init();
-  }
-  function init(){
-    particles=[];
-    for(let i=0;i<count;i++){
-      const z=Math.random();
-      particles.push({
-        x:(Math.random()-.5)*w*1.8,
-        y:(Math.random()-.5)*h*1.8,
-        z,
-        r:.45+z*1.65,
-        a:.12+z*.72,
-        vx:(Math.random()-.5)*(0.08+z*.16),
-        vy:(Math.random()-.5)*(0.08+z*.16),
-        phase:Math.random()*Math.PI*2
-      });
+  <canvas id="field"></canvas>
+  <main class="hero" aria-label="Guido Kindwerley">
+    <div>
+      <h1>GUIDO KINDWERLEY</h1>
+      <div class="line"></div>
+      <p>Founder · Pilot · Builder</p>
+    </div>
+  </main>
+  <div class="grain"></div>
+  <script>
+    const canvas = document.getElementById('field');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let w=0,h=0,dpr=1,particles=[];
+    const mouse={x:0,y:0,tx:0,ty:0,active:false};
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resize(){
+      dpr=Math.min(window.devicePixelRatio||1,2);
+      w=canvas.width=Math.floor(innerWidth*dpr); h=canvas.height=Math.floor(innerHeight*dpr);
+      canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px';
+      init();
     }
-  }
-  function project(p){
-    const depth=.42+p.z*1.28;
-    const cx=w/2 + pointer.x*(10+42*p.z);
-    const cy=h/2 + pointer.y*(7+34*p.z);
-    return {x:cx+p.x*depth,y:cy+p.y*depth,s:depth};
-  }
-  function frame(){
-    t+=0.012;
-    pointer.x += (pointer.tx-pointer.x)*0.045; pointer.y += (pointer.ty-pointer.y)*0.045;
-    ctx.fillStyle='#020304'; ctx.fillRect(0,0,w,h);
-    const g=ctx.createRadialGradient(w*(.5+pointer.x*.08),h*(.45+pointer.y*.08),0,w/2,h/2,Math.max(w,h)*.72);
-    g.addColorStop(0,'#11141a'); g.addColorStop(.42,'#050608'); g.addColorStop(1,'#020304');
-    ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-    const pts=[];
-    for(const p of particles){
-      p.x += p.vx + Math.sin(t+p.phase)*0.035*p.z;
-      p.y += p.vy + Math.cos(t*.9+p.phase)*0.025*p.z;
-      if(p.x>w) p.x=-w; if(p.x<-w) p.x=w; if(p.y>h) p.y=-h; if(p.y<-h) p.y=h;
-      const pr=project(p); pts.push({...pr,p});
-    }
-    ctx.lineWidth=1;
-    for(let i=0;i<pts.length;i++){
-      const a=pts[i]; if(a.p.z<.25) continue;
-      for(let j=i+1;j<Math.min(pts.length,i+22);j++){
-        const b=pts[j], dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
-        const limit=70+(a.p.z+b.p.z)*28;
-        if(dist<limit){
-          const alpha=(1-dist/limit)*.17*Math.min(a.p.z,b.p.z);
-          ctx.strokeStyle=`rgba(244,242,236,${alpha})`;
-          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-        }
+    function init(){
+      const area=innerWidth*innerHeight;
+      const count=Math.min(520,Math.max(170,Math.floor(area/3300)));
+      particles=[];
+      for(let i=0;i<count;i++){
+        const layer=Math.random();
+        const z=layer<.18?1.7:layer<.62?1.0:.55;
+        particles.push({
+          x:Math.random()*w,y:Math.random()*h,z,
+          vx:(Math.random()-.5)*.11*dpr*z,vy:(Math.random()-.5)*.11*dpr*z,
+          r:(Math.random()*1.05+.34)*dpr*z,
+          o:(Math.random()*.42+.12)*(z/1.7),
+          phase:Math.random()*Math.PI*2
+        });
       }
     }
-    for(const a of pts){
-      const twinkle=(Math.sin(t*2+a.p.phase)+1)*.5;
-      ctx.beginPath();
-      ctx.fillStyle=`rgba(244,242,236,${a.p.a*(.48+twinkle*.35)})`;
-      ctx.arc(a.x,a.y,a.p.r*a.s,0,Math.PI*2); ctx.fill();
+    function move(e){mouse.tx=e.clientX*dpr;mouse.ty=e.clientY*dpr;mouse.active=true}
+    addEventListener('mousemove',move,{passive:true});
+    addEventListener('touchmove',e=>{if(e.touches[0])move(e.touches[0])},{passive:true});
+    addEventListener('resize',resize);
+
+    function draw(t){
+      mouse.x += (mouse.tx-mouse.x)*.045; mouse.y += (mouse.ty-mouse.y)*.045;
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle='rgba(5,5,6,.42)'; ctx.fillRect(0,0,w,h);
+
+      const cx=w/2, cy=h*.49;
+      for(const p of particles){
+        const dx=p.x-mouse.x,dy=p.y-mouse.y,md=Math.sqrt(dx*dx+dy*dy)||1;
+        if(mouse.active && md<210*dpr){
+          const force=(1-md/(210*dpr))*0.018*p.z;
+          p.vx += dx/md*force; p.vy += dy/md*force;
+        }
+        const ndx=p.x-cx,ndy=p.y-cy,dist=Math.sqrt(ndx*ndx+ndy*ndy)||1;
+        p.vx += -ndx/dist*0.0008*p.z; p.vy += -ndy/dist*0.00045*p.z;
+        p.vx += Math.cos(t*.00018+p.phase)*0.0012*p.z; p.vy += Math.sin(t*.00016+p.phase)*0.0012*p.z;
+        p.x+=p.vx; p.y+=p.vy; p.vx*=.992; p.vy*=.992;
+        if(p.x<-40*dpr)p.x=w+40*dpr; if(p.x>w+40*dpr)p.x=-40*dpr;
+        if(p.y<-40*dpr)p.y=h+40*dpr; if(p.y>h+40*dpr)p.y=-40*dpr;
+      }
+
+      ctx.lineWidth=.55*dpr;
+      for(let i=0;i<particles.length;i++){
+        const a=particles[i];
+        for(let j=i+1;j<Math.min(particles.length,i+34);j++){
+          const b=particles[j];
+          const dx=a.x-b.x,dy=a.y-b.y,ds=dx*dx+dy*dy,max=(96*dpr)*(96*dpr)*Math.max(a.z,b.z);
+          if(ds<max){
+            const alpha=(1-ds/max)*.105*Math.min(a.z,b.z);
+            ctx.strokeStyle=`rgba(245,245,240,${alpha})`;
+            ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          }
+        }
+      }
+
+      for(const p of particles){
+        const pulse=(Math.sin(t*.001+p.phase)+1)*.5;
+        ctx.beginPath();
+        ctx.fillStyle=`rgba(248,248,244,${p.o + pulse*.08})`;
+        ctx.arc(p.x,p.y,p.r*(.8+pulse*.45),0,Math.PI*2);ctx.fill();
+      }
+      if(!prefersReduced) requestAnimationFrame(draw);
     }
-    // foreground drifting particles
-    ctx.fillStyle='rgba(255,255,255,.55)';
-    requestAnimationFrame(frame);
-  }
-  addEventListener('mousemove',e=>{pointer.active=true;pointer.tx=(e.clientX/w-.5);pointer.ty=(e.clientY/h-.5);});
-  addEventListener('touchmove',e=>{const q=e.touches[0]; if(q){pointer.tx=(q.clientX/w-.5);pointer.ty=(q.clientY/h-.5)}},{passive:true});
-  addEventListener('resize',resize,{passive:true});
-  resize(); frame();
-})();
-</script>
+    resize(); requestAnimationFrame(draw);
+  </script>
 </body>
 </html>
