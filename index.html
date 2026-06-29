@@ -4,40 +4,108 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Guido Kindwerley</title>
-  <meta name="theme-color" content="#020202" />
+  <meta name="description" content="Guido Kindwerley" />
   <style>
-    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020202;color:white;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 58%,rgba(255,255,255,.13),transparent 34%),radial-gradient(circle at 20% 20%,rgba(255,255,255,.045),transparent 30%),linear-gradient(180deg,#060606,#010101 72%);pointer-events:none}
-    canvas{position:fixed;inset:0;width:100%;height:100%}
-    .grain{position:fixed;inset:0;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");mix-blend-mode:screen}
-    main{position:relative;z-index:2;width:100%;height:100%;display:grid;place-items:center;text-align:center;padding:24px;pointer-events:none}
-    .wrap{animation:enter 2.2s cubic-bezier(.2,.8,.2,1) both}
-    h1{margin:0;font-weight:300;font-size:clamp(2.2rem,5.4vw,7.4rem);letter-spacing:clamp(.18em,1.05vw,.55em);line-height:1.05;text-indent:.42em;text-shadow:0 0 38px rgba(255,255,255,.25)}
-    .line{width:min(360px,48vw);height:1px;margin:28px auto 20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:scaleX(.85);opacity:.7}
-    p{margin:0;font-size:clamp(.58rem,.8vw,.82rem);letter-spacing:.72em;text-indent:.72em;text-transform:uppercase;color:rgba(255,255,255,.62);font-weight:400}
-    .vignette{position:fixed;inset:0;pointer-events:none;z-index:3;background:radial-gradient(circle at center,transparent 44%,rgba(0,0,0,.58) 100%)}
-    @keyframes enter{0%{opacity:0;filter:blur(18px);transform:translateY(18px) scale(.985)}100%{opacity:1;filter:blur(0);transform:none}}
-    @media(max-width:700px){h1{font-size:2.35rem;letter-spacing:.22em;text-indent:.22em}.line{margin:22px auto 16px;width:220px}p{font-size:.56rem;letter-spacing:.34em;text-indent:.34em}}
+    :root{--bg:#050506;--fg:#f3f2ee;--muted:rgba(243,242,238,.52)}
+    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--fg)}
+    body:before{content:"";position:fixed;inset:-20%;background:radial-gradient(circle at 50% 46%,rgba(255,255,255,.12),rgba(255,255,255,.035) 22%,transparent 55%),radial-gradient(circle at 18% 30%,rgba(255,255,255,.06),transparent 35%);filter:blur(18px);pointer-events:none}
+    canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+    .hero{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center;padding:24px;opacity:0;animation:arrive 1.8s cubic-bezier(.2,.8,.2,1) .35s forwards;filter:blur(10px)}
+    h1{margin:0;font-weight:200;letter-spacing:.25em;font-size:clamp(2.35rem,6vw,6.2rem);line-height:1.04;text-shadow:0 0 34px rgba(255,255,255,.16)}
+    .line{width:min(240px,38vw);height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.44),transparent);margin:26px auto 18px;opacity:.65}
+    p{margin:0;font-size:clamp(.56rem,1.1vw,.82rem);letter-spacing:.68em;text-transform:uppercase;color:var(--muted);font-weight:500}
+    .grain{position:fixed;inset:0;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");mix-blend-mode:screen}
+    @keyframes arrive{to{opacity:1;filter:blur(0)}}
+    @media (max-width:720px){h1{letter-spacing:.14em}.line{margin:20px auto 15px}p{letter-spacing:.38em}}
   </style>
 </head>
 <body>
-<canvas id="field"></canvas>
-<main><div class="wrap"><h1>GUIDO KINDWERLEY</h1><div class="line"></div><p>Founder · Pilot · Builder</p></div></main>
-<div class="grain"></div><div class="vignette"></div>
-<script>
-const canvas=document.getElementById('field'),ctx=canvas.getContext('2d');let w,h,dpr,particles=[],mouse={x:0,y:0,tx:0,ty:0,active:false};
-function resize(){dpr=Math.min(window.devicePixelRatio||1,2);w=innerWidth;h=innerHeight;canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);init()} window.addEventListener('resize',resize);
-function init(){const count=Math.min(190,Math.floor(w*h/8500));particles=[];for(let i=0;i<count;i++){const z=Math.random();particles.push({x:Math.random()*w,y:Math.random()*h,ox:0,oy:0,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:.45+z*1.4,z,phase:Math.random()*Math.PI*2})}}
-addEventListener('pointermove',e=>{mouse.tx=e.clientX;mouse.ty=e.clientY;mouse.active=true});addEventListener('pointerleave',()=>mouse.active=false);
-function draw(t){requestAnimationFrame(draw);mouse.x+=(mouse.tx-mouse.x)*.055;mouse.y+=(mouse.ty-mouse.y)*.055;ctx.clearRect(0,0,w,h);
- const cx=w/2,cy=h/2; const glow=ctx.createRadialGradient(mouse.x||cx,mouse.y||cy,0,mouse.x||cx,mouse.y||cy,Math.max(w,h)*.55);glow.addColorStop(0,'rgba(255,255,255,.06)');glow.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
- for(const p of particles){const drift=Math.sin(t*.00035+p.phase)*.28; p.x+=p.vx+drift*.05; p.y+=p.vy+Math.cos(t*.00028+p.phase)*.04; if(p.x<-20)p.x=w+20;if(p.x>w+20)p.x=-20;if(p.y<-20)p.y=h+20;if(p.y>h+20)p.y=-20;
-  const dx=p.x-cx,dy=p.y-cy,dist=Math.hypot(dx,dy); const pull=Math.max(0,1-dist/Math.max(w,h)*1.4)*.018; p.x-=dx*pull*.018; p.y-=dy*pull*.018;
- }
- for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){const a=particles[i],b=particles[j],dx=a.x-b.x,dy=a.y-b.y,dist=Math.hypot(dx,dy);const max=118;if(dist<max){const op=(1-dist/max)*.115;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(255,255,255,${op})`;ctx.lineWidth=.55;ctx.stroke()}}}
- for(const p of particles){const md=mouse.active?Math.hypot(p.x-mouse.x,p.y-mouse.y):9999;const boost=Math.max(0,1-md/220);ctx.beginPath();ctx.arc(p.x,p.y,p.r+boost*.9,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${.22+p.z*.42+boost*.25})`;ctx.fill()}
-}
-resize();requestAnimationFrame(draw);
-</script>
+  <canvas id="field"></canvas>
+  <main class="hero" aria-label="Guido Kindwerley">
+    <div>
+      <h1>GUIDO KINDWERLEY</h1>
+      <div class="line"></div>
+      <p>Founder · Pilot · Builder</p>
+    </div>
+  </main>
+  <div class="grain"></div>
+  <script>
+    const canvas = document.getElementById('field');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let w=0,h=0,dpr=1,particles=[];
+    const mouse={x:0,y:0,tx:0,ty:0,active:false};
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resize(){
+      dpr=Math.min(window.devicePixelRatio||1,2);
+      w=canvas.width=Math.floor(innerWidth*dpr); h=canvas.height=Math.floor(innerHeight*dpr);
+      canvas.style.width=innerWidth+'px'; canvas.style.height=innerHeight+'px';
+      init();
+    }
+    function init(){
+      const area=innerWidth*innerHeight;
+      const count=Math.min(520,Math.max(170,Math.floor(area/3300)));
+      particles=[];
+      for(let i=0;i<count;i++){
+        const layer=Math.random();
+        const z=layer<.18?1.7:layer<.62?1.0:.55;
+        particles.push({
+          x:Math.random()*w,y:Math.random()*h,z,
+          vx:(Math.random()-.5)*.11*dpr*z,vy:(Math.random()-.5)*.11*dpr*z,
+          r:(Math.random()*1.05+.34)*dpr*z,
+          o:(Math.random()*.42+.12)*(z/1.7),
+          phase:Math.random()*Math.PI*2
+        });
+      }
+    }
+    function move(e){mouse.tx=e.clientX*dpr;mouse.ty=e.clientY*dpr;mouse.active=true}
+    addEventListener('mousemove',move,{passive:true});
+    addEventListener('touchmove',e=>{if(e.touches[0])move(e.touches[0])},{passive:true});
+    addEventListener('resize',resize);
+
+    function draw(t){
+      mouse.x += (mouse.tx-mouse.x)*.045; mouse.y += (mouse.ty-mouse.y)*.045;
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle='rgba(5,5,6,.42)'; ctx.fillRect(0,0,w,h);
+
+      const cx=w/2, cy=h*.49;
+      for(const p of particles){
+        const dx=p.x-mouse.x,dy=p.y-mouse.y,md=Math.sqrt(dx*dx+dy*dy)||1;
+        if(mouse.active && md<210*dpr){
+          const force=(1-md/(210*dpr))*0.018*p.z;
+          p.vx += dx/md*force; p.vy += dy/md*force;
+        }
+        const ndx=p.x-cx,ndy=p.y-cy,dist=Math.sqrt(ndx*ndx+ndy*ndy)||1;
+        p.vx += -ndx/dist*0.0008*p.z; p.vy += -ndy/dist*0.00045*p.z;
+        p.vx += Math.cos(t*.00018+p.phase)*0.0012*p.z; p.vy += Math.sin(t*.00016+p.phase)*0.0012*p.z;
+        p.x+=p.vx; p.y+=p.vy; p.vx*=.992; p.vy*=.992;
+        if(p.x<-40*dpr)p.x=w+40*dpr; if(p.x>w+40*dpr)p.x=-40*dpr;
+        if(p.y<-40*dpr)p.y=h+40*dpr; if(p.y>h+40*dpr)p.y=-40*dpr;
+      }
+
+      ctx.lineWidth=.55*dpr;
+      for(let i=0;i<particles.length;i++){
+        const a=particles[i];
+        for(let j=i+1;j<Math.min(particles.length,i+34);j++){
+          const b=particles[j];
+          const dx=a.x-b.x,dy=a.y-b.y,ds=dx*dx+dy*dy,max=(96*dpr)*(96*dpr)*Math.max(a.z,b.z);
+          if(ds<max){
+            const alpha=(1-ds/max)*.105*Math.min(a.z,b.z);
+            ctx.strokeStyle=`rgba(245,245,240,${alpha})`;
+            ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          }
+        }
+      }
+
+      for(const p of particles){
+        const pulse=(Math.sin(t*.001+p.phase)+1)*.5;
+        ctx.beginPath();
+        ctx.fillStyle=`rgba(248,248,244,${p.o + pulse*.08})`;
+        ctx.arc(p.x,p.y,p.r*(.8+pulse*.45),0,Math.PI*2);ctx.fill();
+      }
+      if(!prefersReduced) requestAnimationFrame(draw);
+    }
+    resize(); requestAnimationFrame(draw);
+  </script>
 </body>
 </html>
