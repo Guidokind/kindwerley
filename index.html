@@ -1,105 +1,124 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Guido Kindwerley</title>
-<style>
-  :root{--bg:#020304;--fg:#f4f2ec;--muted:rgba(244,242,236,.56)}
-  *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--fg)}
-  canvas{position:fixed;inset:0;width:100%;height:100%;display:block;background:radial-gradient(circle at 50% 45%,#101217 0%,#050608 42%,#020304 100%)}
-  .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center,transparent 0%,transparent 44%,rgba(0,0,0,.72) 100%)}
-  .hero{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;text-align:center;padding:24px;mix-blend-mode:screen}
-  h1{margin:0;font-weight:300;letter-spacing:.34em;font-size:clamp(28px,5.2vw,72px);line-height:1.05;text-indent:.34em;text-shadow:0 0 28px rgba(255,255,255,.18);animation:focusIn 1.6s cubic-bezier(.2,.9,.2,1) both}
-  p{margin:18px 0 0;font-weight:300;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:var(--muted);font-size:clamp(10px,1.15vw,14px);animation:rise .9s ease both;animation-delay:1.05s}
-  .grain{position:fixed;inset:-20%;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 7s steps(6) infinite}
-  @keyframes focusIn{0%{opacity:0;filter:blur(14px);transform:translateY(14px) scale(.985)}100%{opacity:1;filter:blur(0);transform:none}}
-  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  @keyframes grain{to{transform:translate3d(-8%,6%,0)}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guido Kindwerley</title>
+  <meta name="description" content="Guido Kindwerley — Founder · Pilot · Builder" />
+  <meta property="og:title" content="Guido Kindwerley" />
+  <meta property="og:description" content="Founder · Pilot · Builder" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kindwerley.com" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050505'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial, Helvetica, sans-serif' font-size='26' letter-spacing='-2' fill='white'%3EGK%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#020304; --text:#f4f4f1; --muted:rgba(244,244,241,.42);
+    }
+    *{box-sizing:border-box} html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;color:var(--text)}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
+      radial-gradient(circle at 50% 45%, rgba(255,255,255,.105), transparent 28%),
+      radial-gradient(circle at 18% 12%, rgba(255,255,255,.045), transparent 24%),
+      radial-gradient(circle at 82% 84%, rgba(255,255,255,.035), transparent 30%),
+      linear-gradient(180deg,#050607 0%,#010202 100%);}
+    body:after{content:"";position:fixed;inset:-30%;pointer-events:none;opacity:.17;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");animation:grain 9s steps(8) infinite;}
+    @keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,2%)}20%{transform:translate(2%,-2%)}30%{transform:translate(-2%,3%)}40%{transform:translate(3%,1%)}50%{transform:translate(-1%,-3%)}60%{transform:translate(2%,3%)}70%{transform:translate(-3%,-1%)}80%{transform:translate(1%,2%)}90%{transform:translate(3%,-3%)}}
+    canvas{position:fixed;inset:0;width:100%;height:100%;display:block;filter:contrast(1.08) saturate(.9)}
+    .vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at center, transparent 0 44%, rgba(0,0,0,.55) 82%, rgba(0,0,0,.82) 100%)}
+    .light{position:fixed;inset:-20%;pointer-events:none;background:radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.095), transparent 18%, transparent 100%);filter:blur(12px);opacity:.85;transition:opacity .4s ease;}
+    main{position:relative;z-index:2;height:100%;display:grid;place-items:center;padding:24px;text-align:center;transform:translate3d(calc(var(--mx,0)*-10px),calc(var(--my,0)*-7px),0)}
+    .mark{animation:enter 1800ms cubic-bezier(.2,.8,.2,1) both;}
+    h1{margin:0;font-weight:200;letter-spacing:.34em;font-size:clamp(2.35rem,6vw,6.25rem);line-height:1.05;text-transform:uppercase;text-shadow:0 0 30px rgba(255,255,255,.10), 0 0 80px rgba(255,255,255,.055);white-space:nowrap;}
+    .rule{width:min(180px,20vw);height:1px;margin:22px auto 18px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);opacity:.45;}
+    p{margin:0;color:var(--muted);font-size:clamp(.58rem,.78vw,.78rem);letter-spacing:.62em;text-transform:uppercase;font-weight:400;}
+    .signature{position:fixed;left:22px;bottom:18px;z-index:3;color:rgba(255,255,255,.24);font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:0;animation:fade 1.4s ease 1.8s forwards;}
+    @keyframes enter{0%{opacity:0;filter:blur(18px);transform:translateY(14px) scale(.985)}55%{opacity:1;filter:blur(2px)}100%{opacity:1;filter:blur(0);transform:none}}
+    @keyframes fade{to{opacity:1}}
+    @media (max-width:700px){h1{font-size:clamp(2rem,10vw,3.5rem);letter-spacing:.18em;white-space:normal}.rule{margin-top:18px}p{letter-spacing:.38em}.signature{display:none}}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  </style>
 </head>
 <body>
-<canvas id="scene" aria-hidden="true"></canvas>
-<div class="grain"></div><div class="vignette"></div>
-<main class="hero"><div><h1>GUIDO KINDWERLEY</h1><p>Founder · Pilot · Builder</p></div></main>
+  <canvas id="space"></canvas>
+  <div class="light" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <main>
+    <section class="mark" aria-label="Guido Kindwerley">
+      <h1>Guido Kindwerley</h1>
+      <div class="rule"></div>
+      <p>Founder · Pilot · Builder</p>
+    </section>
+  </main>
+  <div class="signature">© 2026</div>
 <script>
 (() => {
-  const canvas = document.getElementById('scene');
-  const ctx = canvas.getContext('2d', { alpha:false });
-  let w=0,h=0,dpr=1,particles=[],t=0;
-  const pointer={x:0,y:0,tx:0,ty:0,active:false};
-  const isMobile = matchMedia('(max-width: 700px)').matches;
-  const count = isMobile ? 180 : 420;
+  const canvas = document.getElementById('space');
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const root = document.documentElement;
+  let w=0,h=0,dpr=1,cx=0,cy=0;
+  let mx=0,my=0, tx=0,ty=0;
+  const particles=[];
+  const layers=[
+    {count:72, size:[.35,.9], speed:.08, alpha:.20, z:.38},
+    {count:58, size:[.55,1.35], speed:.16, alpha:.42, z:.75},
+    {count:22, size:[.9,2.15], speed:.29, alpha:.62, z:1.25}
+  ];
   function resize(){
-    dpr=Math.min(devicePixelRatio||1,2);
-    w=innerWidth; h=innerHeight;
-    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr);
-    canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
-    init();
+    dpr=Math.min(window.devicePixelRatio||1,2.6); w=innerWidth; h=innerHeight; cx=w/2; cy=h/2;
+    canvas.width=Math.floor(w*dpr); canvas.height=Math.floor(h*dpr); canvas.style.width=w+'px'; canvas.style.height=h+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(!particles.length) init();
   }
+  function rand(a,b){return a+Math.random()*(b-a)}
   function init(){
-    particles=[];
-    for(let i=0;i<count;i++){
-      const z=Math.random();
-      particles.push({
-        x:(Math.random()-.5)*w*1.8,
-        y:(Math.random()-.5)*h*1.8,
-        z,
-        r:.45+z*1.65,
-        a:.12+z*.72,
-        vx:(Math.random()-.5)*(0.08+z*.16),
-        vy:(Math.random()-.5)*(0.08+z*.16),
-        phase:Math.random()*Math.PI*2
+    for(const L of layers){
+      for(let i=0;i<L.count;i++) particles.push({
+        x:rand(-w*.08,w*1.08), y:rand(-h*.08,h*1.08), ox:0, oy:0,
+        r:rand(L.size[0],L.size[1]), vx:rand(-L.speed,L.speed), vy:rand(-L.speed,L.speed),
+        a:rand(L.alpha*.35,L.alpha), z:L.z, phase:rand(0,Math.PI*2), pulse:rand(.003,.009)
       });
     }
   }
-  function project(p){
-    const depth=.42+p.z*1.28;
-    const cx=w/2 + pointer.x*(10+42*p.z);
-    const cy=h/2 + pointer.y*(7+34*p.z);
-    return {x:cx+p.x*depth,y:cy+p.y*depth,s:depth};
+  function pointer(e){
+    const x=(e.touches?e.touches[0].clientX:e.clientX), y=(e.touches?e.touches[0].clientY:e.clientY);
+    tx=(x-cx)/cx; ty=(y-cy)/cy;
+    root.style.setProperty('--x', x+'px'); root.style.setProperty('--y', y+'px');
   }
-  function frame(){
-    t+=0.012;
-    pointer.x += (pointer.tx-pointer.x)*0.045; pointer.y += (pointer.ty-pointer.y)*0.045;
-    ctx.fillStyle='#020304'; ctx.fillRect(0,0,w,h);
-    const g=ctx.createRadialGradient(w*(.5+pointer.x*.08),h*(.45+pointer.y*.08),0,w/2,h/2,Math.max(w,h)*.72);
-    g.addColorStop(0,'#11141a'); g.addColorStop(.42,'#050608'); g.addColorStop(1,'#020304');
+  addEventListener('mousemove', pointer, {passive:true}); addEventListener('touchmove', pointer, {passive:true}); addEventListener('resize', resize);
+  function draw(t){
+    mx += (tx-mx)*.055; my += (ty-my)*.055;
+    root.style.setProperty('--mx', mx.toFixed(4)); root.style.setProperty('--my', my.toFixed(4));
+    ctx.clearRect(0,0,w,h);
+    const time=t*.001;
+    // soft cinematic beams
+    const g=ctx.createRadialGradient(cx+mx*90, cy+my*70, 0, cx+mx*90, cy+my*70, Math.max(w,h)*.62);
+    g.addColorStop(0,'rgba(255,255,255,.055)'); g.addColorStop(.35,'rgba(255,255,255,.018)'); g.addColorStop(1,'rgba(255,255,255,0)');
     ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-    const pts=[];
     for(const p of particles){
-      p.x += p.vx + Math.sin(t+p.phase)*0.035*p.z;
-      p.y += p.vy + Math.cos(t*.9+p.phase)*0.025*p.z;
-      if(p.x>w) p.x=-w; if(p.x<-w) p.x=w; if(p.y>h) p.y=-h; if(p.y<-h) p.y=h;
-      const pr=project(p); pts.push({...pr,p});
+      const driftX=Math.sin(time*.38+p.phase)*.16*p.z;
+      const driftY=Math.cos(time*.31+p.phase)*.13*p.z;
+      p.x += p.vx + driftX; p.y += p.vy + driftY;
+      if(p.x<-80) p.x=w+80; if(p.x>w+80) p.x=-80; if(p.y<-80) p.y=h+80; if(p.y>h+80) p.y=-80;
+      const dx=p.x-(cx+mx*120), dy=p.y-(cy+my*90); const dist=Math.sqrt(dx*dx+dy*dy); const influence=Math.max(0,1-dist/260);
+      const warp=influence*26*p.z;
+      p.ox=(dx/(dist||1))*warp; p.oy=(dy/(dist||1))*warp;
+      const x=p.x+p.ox+mx*18*p.z, y=p.y+p.oy+my*12*p.z;
+      const twinkle=.65+Math.sin(time*2.2+p.phase)*.35;
+      ctx.beginPath(); ctx.arc(x,y,p.r*(1+influence*.7),0,Math.PI*2);
+      ctx.fillStyle=`rgba(245,245,240,${p.a*twinkle*(.75+influence*.55)})`; ctx.fill();
     }
-    ctx.lineWidth=1;
-    for(let i=0;i<pts.length;i++){
-      const a=pts[i]; if(a.p.z<.25) continue;
-      for(let j=i+1;j<Math.min(pts.length,i+22);j++){
-        const b=pts[j], dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
-        const limit=70+(a.p.z+b.p.z)*28;
-        if(dist<limit){
-          const alpha=(1-dist/limit)*.17*Math.min(a.p.z,b.p.z);
-          ctx.strokeStyle=`rgba(244,242,236,${alpha})`;
-          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-        }
+    // ephemeral connections only around center, ultra thin
+    ctx.lineWidth=.45;
+    for(let i=0;i<particles.length;i++){
+      const a=particles[i]; if(a.z<.7) continue;
+      for(let j=i+1;j<particles.length;j++){
+        const b=particles[j]; if(b.z<.7) continue;
+        const ax=a.x+a.ox+mx*18*a.z, ay=a.y+a.oy+my*12*a.z, bx=b.x+b.ox+mx*18*b.z, by=b.y+b.oy+my*12*b.z;
+        const dx=ax-bx, dy=ay-by, dd=dx*dx+dy*dy;
+        if(dd<12500){ const alpha=(1-Math.sqrt(dd)/112)*.11; ctx.strokeStyle=`rgba(245,245,240,${alpha})`; ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke(); }
       }
     }
-    for(const a of pts){
-      const twinkle=(Math.sin(t*2+a.p.phase)+1)*.5;
-      ctx.beginPath();
-      ctx.fillStyle=`rgba(244,242,236,${a.p.a*(.48+twinkle*.35)})`;
-      ctx.arc(a.x,a.y,a.p.r*a.s,0,Math.PI*2); ctx.fill();
-    }
-    // foreground drifting particles
-    ctx.fillStyle='rgba(255,255,255,.55)';
-    requestAnimationFrame(frame);
+    requestAnimationFrame(draw);
   }
-  addEventListener('mousemove',e=>{pointer.active=true;pointer.tx=(e.clientX/w-.5);pointer.ty=(e.clientY/h-.5);});
-  addEventListener('touchmove',e=>{const q=e.touches[0]; if(q){pointer.tx=(q.clientX/w-.5);pointer.ty=(q.clientY/h-.5)}},{passive:true});
-  addEventListener('resize',resize,{passive:true});
-  resize(); frame();
+  resize(); requestAnimationFrame(draw);
 })();
 </script>
 </body>
