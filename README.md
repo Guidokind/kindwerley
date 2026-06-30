@@ -45,3 +45,4 @@ The project intentionally avoids frameworks, prioritizing simplicity, speed and 
 ---
 
 © 2026 Guido Kindwerley
+
