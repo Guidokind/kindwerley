@@ -1,34 +1,52 @@
-# Guido Kindwerley
+Guido Kindwerley
 
-Founder · Pilot · Builder
+Founder • Pilot • Builder
 
-Personal website hosted with GitHub Pages.
+Minimalist personal website focused on identity, performance and digital presence.
 
-## About
+About
 
-This repository contains the source code for my personal website.
+This repository contains the source code for kindwerley.com.
 
-Designed with a minimalist philosophy and focused on performance, simplicity and attention to detail.
+Designed as a cinematic, ultra-minimal personal landing page with emphasis on motion, typography and visual identity.
 
-The site will evolve over time alongside the projects I'm building.
+Built to provide a fast, elegant and future-proof web presence.
 
-## Tech Stack
+Features
+Cinematic particle engine
+Animated film grain
+Responsive layout
+Open Graph preview
+Twitter Cards
+Structured Data (Schema.org)
+XML Sitemap
+Robots.txt
+SEO optimized
+Cloudflare CDN
+GitHub Pages deployment
+Tech Stack
+HTML5
+CSS3
+Vanilla JavaScript
+Canvas API
+Schema.org
+GitHub Pages
+Cloudflare
+Performance
+Lightweight
+No frameworks
+Optimized animations
+GPU accelerated rendering
+Mobile first
+Status
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- GitHub Pages
-- Cloudflare
+Actively maintained.
 
-## Status
+Continuous improvements in visual design, performance and search engine optimization.
 
-Currently under active development.
+Philosophy
 
-## Philosophy
-
-> Simplicity is not the absence of complexity.
-> It is the result of mastering it.
-
----
+Simplicity is not the absence of complexity.
+It is the result of mastering it.
 
 © 2026 Guido Kindwerley
