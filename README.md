@@ -2,27 +2,18 @@
 
 Founder · Pilot · Builder
 
-Minimalist digital identity focused on aviation, entrepreneurship and technology.
-
-## About
-
-This repository contains the source code for **kindwerley.com**.
-
-The site is designed as a cinematic personal landing page with emphasis on typography, atmosphere, performance and search visibility.
+Minimal personal website and digital identity for **kindwerley.com**.
 
 ## Highlights
 
-- Cinematic landing page
-- Lightweight canvas atmosphere
-- Responsive design
-- Open Graph preview
-- Twitter Cards
+- Lightweight production landing page
+- Subtle cinematic starfield
+- Soft letter glow without exposing personal location
+- Open Graph and Twitter Card preview
 - Schema.org structured data
-- XML sitemap
-- Robots.txt
 - Microsoft Clarity analytics
-- GitHub Pages deployment
-- Cloudflare delivery
+- Robots.txt and XML sitemap
+- Hosted with GitHub Pages and Cloudflare
 
 ## Stack
 
@@ -35,7 +26,7 @@ The site is designed as a cinematic personal landing page with emphasis on typog
 
 ## Philosophy
 
-> Simplicity is not the absence of complexity.  
+> Simplicity is not the absence of complexity.
 > It is the result of mastering it.
 
 © Guido Kindwerley
