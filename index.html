@@ -6,9 +6,13 @@
   <title>Guido Kindwerley</title>
   <meta name="description" content="Guido Kindwerley — Founder · Pilot · Builder" />
   <meta name="theme-color" content="#050608" />
-  <link rel="canonical" href="https://kindwerley.com/" />
   <meta name="author" content="Guido Kindwerley" />
   <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="Guido Kindwerley, Kindwerley, founder, pilot, builder, aviation, Wingsburg" />
+  <link rel="canonical" href="https://kindwerley.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Guido Kindwerley" />
   <meta property="og:description" content="Founder · Pilot · Builder" />
   <meta property="og:type" content="website" />
@@ -18,19 +22,76 @@
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+
+  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Guido Kindwerley" />
   <meta name="twitter:description" content="Founder · Pilot · Builder" />
   <meta name="twitter:image" content="https://kindwerley.com/preview.jpg" />
+
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050608'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='25' fill='white' letter-spacing='-1'%3EGK%3C/text%3E%3C/svg%3E" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://kindwerley.com/#person",
+        "name": "Guido Kindwerley",
+        "url": "https://kindwerley.com/",
+        "image": "https://kindwerley.com/preview.jpg",
+        "jobTitle": ["Founder", "Pilot", "Builder"],
+        "nationality": { "@type": "Country", "name": "Argentina" },
+        "sameAs": ["https://github.com/Guidokind"],
+        "knowsAbout": ["Aviation", "Entrepreneurship", "Technology"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://kindwerley.com/#website",
+        "url": "https://kindwerley.com/",
+        "name": "Guido Kindwerley",
+        "publisher": { "@id": "https://kindwerley.com/#person" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://kindwerley.com/#webpage",
+        "url": "https://kindwerley.com/",
+        "name": "Guido Kindwerley",
+        "description": "Founder · Pilot · Builder",
+        "isPartOf": { "@id": "https://kindwerley.com/#website" },
+        "about": { "@id": "https://kindwerley.com/#person" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://kindwerley.com/preview.jpg",
+          "width": 1200,
+          "height": 630
+        },
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xf5injvym0");
+  </script>
+
   <style>
     :root {
       --white: rgba(246, 248, 250, .94);
       --muted: rgba(246, 248, 250, .44);
       --faint: rgba(246, 248, 250, .16);
+      --bg: #020304;
     }
     * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; overflow: hidden; background: #020304; }
+    html, body { height: 100%; margin: 0; overflow: hidden; background: var(--bg); }
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--white);
@@ -38,12 +99,6 @@
       text-rendering: geometricPrecision;
     }
     canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
-    #film {
-      position: fixed; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
-      opacity: .155; mix-blend-mode: soft-light;
-      transform: translate3d(0,0,0);
-    }
-    @media (max-width: 680px) { #film { opacity: .12; } }
     .vignette {
       position: fixed; inset: 0; pointer-events: none;
       background:
@@ -54,7 +109,11 @@
       position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none;
       transform: translate3d(0, 0, 0);
     }
-    .mark { text-align: center; padding: 0 5vw; opacity: 0; filter: blur(18px); transform: translateY(10px) scale(.992); animation: reveal 2.4s cubic-bezier(.2,.8,.1,1) .35s forwards; }
+    .mark {
+      text-align: center; padding: 0 5vw; opacity: 0; filter: blur(18px);
+      transform: translateY(10px) scale(.992);
+      animation: reveal 2.4s cubic-bezier(.2,.8,.1,1) .35s forwards;
+    }
     @keyframes reveal { to { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); } }
     h1 {
       margin: 0;
@@ -82,77 +141,22 @@
       opacity: .45;
     }
     .corner {
-      position: fixed; color: rgba(255,255,255,.22); font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
-      bottom: 28px; left: 50%; transform: translateX(-50%); opacity: .65; pointer-events:none;
+      position: fixed; color: rgba(255,255,255,.22); font-size: 10px; letter-spacing: .26em;
+      text-transform: uppercase; bottom: 28px; left: 50%; transform: translateX(-50%);
+      opacity: .65; pointer-events:none;
     }
     @media (max-width: 680px) {
       h1 { font-size: clamp(1.55rem, 8.5vw, 2.65rem); letter-spacing: clamp(.18rem, 1.9vw, .45rem); white-space: normal; }
       .subtitle { letter-spacing: .22rem; font-size: .56rem; }
       .corner { display:none; }
     }
-    @media (prefers-reduced-motion: reduce) { .mark, .subtitle { animation: none; opacity: 1; filter: none; transform:none; } #film { display:none; } }
-  </style>
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://kindwerley.com/#person",
-      "name": "Guido Kindwerley",
-      "url": "https://kindwerley.com/",
-      "image": "https://kindwerley.com/preview.jpg",
-      "jobTitle": [
-        "Founder",
-        "Pilot",
-        "Builder"
-      ],
-      "nationality": {
-        "@type": "Country",
-        "name": "Argentina"
-      },
-      "sameAs": [
-        "https://github.com/Guidokind"
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://kindwerley.com/#website",
-      "url": "https://kindwerley.com/",
-      "name": "Guido Kindwerley",
-      "publisher": {
-        "@id": "https://kindwerley.com/#person"
-      },
-      "inLanguage": "en"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://kindwerley.com/#webpage",
-      "url": "https://kindwerley.com/",
-      "name": "Guido Kindwerley",
-      "description": "Founder · Pilot · Builder",
-      "isPartOf": {
-        "@id": "https://kindwerley.com/#website"
-      },
-      "about": {
-        "@id": "https://kindwerley.com/#person"
-      },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://kindwerley.com/preview.jpg",
-        "width": 1200,
-        "height": 630
-      },
-      "inLanguage": "en"
+    @media (prefers-reduced-motion: reduce) {
+      .mark, .subtitle { animation: none; opacity: 1; filter: none; transform:none; }
     }
-  ]
-}
-  </script>
+  </style>
 </head>
 <body>
   <canvas id="space" aria-hidden="true"></canvas>
-  <canvas id="film" aria-hidden="true"></canvas>
   <div class="vignette"></div>
   <main class="hero" aria-label="Guido Kindwerley">
     <section class="mark">
@@ -162,193 +166,179 @@
     </section>
   </main>
   <div class="corner">Kindwerley.com</div>
+
   <script>
     (() => {
       const canvas = document.getElementById('space');
       const ctx = canvas.getContext('2d', { alpha: false });
-      let w = 0, h = 0, dpr = 1, cx = 0, cy = 0;
-      let particles = [];
-      let t = 0;
-      const mouse = { x: 0, y: 0, tx: 0, ty: 0, active: false };
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let w = 0, h = 0, dpr = 1, cx = 0, cy = 0, t = 0;
+      let particles = [], noiseCanvas, noiseCtx, noiseSize = 160, frame = 0;
+      const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
 
       function resize() {
-        dpr = Math.min(devicePixelRatio || 1, 2.35);
+        dpr = Math.min(devicePixelRatio || 1, 2);
         w = innerWidth; h = innerHeight; cx = w / 2; cy = h / 2;
         canvas.width = Math.floor(w * dpr); canvas.height = Math.floor(h * dpr);
         canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
         ctx.setTransform(dpr,0,0,dpr,0,0);
-        build();
+        buildParticles();
+        buildNoiseCanvas();
       }
 
-      function build() {
+      function buildParticles() {
         const area = w * h;
-        const base = Math.round(Math.min(3600, Math.max(1150, area / 820)));
-        particles = [];
-        for (let i = 0; i < base; i++) {
-          const layerPick = Math.random();
-          const z = layerPick < .62 ? Math.random() * .45 + .05 : layerPick < .91 ? Math.random() * .3 + .5 : Math.random() * .2 + .8;
-          particles.push({
+        const count = Math.round(Math.min(1650, Math.max(650, area / 1450)));
+        particles = Array.from({ length: count }, () => {
+          const z = Math.pow(Math.random(), .72);
+          return {
             x: Math.random() * w,
             y: Math.random() * h,
             z,
-            r: (Math.random() * 0.9 + 0.22) * (0.55 + z * 1.15),
-            a: (Math.random() * 0.42 + 0.08) * (0.45 + z * .9),
-            vx: (Math.random() - .5) * (0.13 + z * .34),
-            vy: (Math.random() - .5) * (0.10 + z * .26),
+            r: (Math.random() * .75 + .18) * (.55 + z * 1.25),
+            a: (Math.random() * .34 + .055) * (.42 + z * .95),
+            vx: (Math.random() - .5) * (.035 + z * .12),
+            vy: (Math.random() - .5) * (.028 + z * .095),
             phase: Math.random() * Math.PI * 2,
-            tw: Math.random() * .018 + .004,
-            hue: Math.random() < .16 ? 'blue' : Math.random() < .18 ? 'warm' : 'white'
-          });
+            hue: Math.random() < .14 ? 'blue' : Math.random() < .18 ? 'warm' : 'white'
+          };
+        });
+      }
+
+      function buildNoiseCanvas() {
+        noiseCanvas = document.createElement('canvas');
+        noiseCtx = noiseCanvas.getContext('2d', { alpha: true });
+        noiseCanvas.width = noiseCanvas.height = noiseSize;
+        updateNoise();
+      }
+
+      function updateNoise() {
+        if (!noiseCtx) return;
+        const img = noiseCtx.createImageData(noiseSize, noiseSize);
+        const data = img.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const v = 116 + Math.random() * 112;
+          const a = Math.random() < .82 ? Math.random() * 9 : Math.random() * 2;
+          data[i] = v; data[i + 1] = v; data[i + 2] = v; data[i + 3] = a;
         }
+        noiseCtx.putImageData(img, 0, 0);
       }
 
-      addEventListener('pointermove', e => { mouse.tx = (e.clientX - cx) / cx; mouse.ty = (e.clientY - cy) / cy; mouse.active = true; }, { passive: true });
-      addEventListener('pointerleave', () => { mouse.tx = 0; mouse.ty = 0; mouse.active = false; });
-      addEventListener('resize', resize);
-
-      function bg() {
-        const gx = cx + mouse.x * 105 + Math.sin(t*.18)*18, gy = cy + mouse.y * 82 + Math.cos(t*.14)*14;
-        const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(w,h) * .78);
-        g.addColorStop(0, '#101820');
-        g.addColorStop(.18, '#090d11');
-        g.addColorStop(.52, '#030506');
-        g.addColorStop(1, '#010101');
-        ctx.fillStyle = g;
-        ctx.fillRect(0,0,w,h);
-
-        const halo = ctx.createRadialGradient(cx + mouse.x * 150 + Math.sin(t*.22)*22, cy + 12 + mouse.y * 105 + Math.cos(t*.19)*16, 0, cx + mouse.x * 150 + Math.sin(t*.22)*22, cy + 12 + mouse.y * 105 + Math.cos(t*.19)*16, Math.min(w,h) * .52);
-        halo.addColorStop(0, 'rgba(210,226,255,.115)');
-        halo.addColorStop(.26, 'rgba(138,165,205,.055)');
-        halo.addColorStop(.62, 'rgba(70,90,115,.018)');
-        halo.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = halo;
-        ctx.fillRect(0,0,w,h);
-      }
-
-      function color(p, alphaMul=1) {
+      function particleColor(p, alphaMul=1) {
         const a = Math.max(0, Math.min(1, p.a * alphaMul));
         if (p.hue === 'blue') return `rgba(185,210,255,${a})`;
         if (p.hue === 'warm') return `rgba(255,238,215,${a})`;
         return `rgba(246,248,250,${a})`;
       }
 
-      function draw(now) {
-        t = now * 0.001;
-        mouse.x += (mouse.tx - mouse.x) * .075;
-        mouse.y += (mouse.ty - mouse.y) * .075;
-        bg();
+      function background() {
+        const gx = cx + mouse.x * 95 + Math.sin(t*.16)*16;
+        const gy = cy + mouse.y * 75 + Math.cos(t*.13)*12;
+        const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(w,h) * .78);
+        g.addColorStop(0, '#111920');
+        g.addColorStop(.18, '#090d11');
+        g.addColorStop(.52, '#030506');
+        g.addColorStop(1, '#010101');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
 
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
-        const mx = cx + mouse.x * cx, my = cy + mouse.y * cy;
-        for (const p of particles) {
-          if (!reduce) {
-            p.x += p.vx + Math.sin(t * .38 + p.phase) * .032 * p.z;
-            p.y += p.vy + Math.cos(t * .31 + p.phase) * .026 * p.z;
-            if (p.x < -20) p.x = w + 20; if (p.x > w + 20) p.x = -20;
-            if (p.y < -20) p.y = h + 20; if (p.y > h + 20) p.y = -20;
-          }
-          const parx = mouse.x * (48 * p.z - 14) + Math.sin(t*.10 + p.phase) * (1.8*p.z), pary = mouse.y * (38 * p.z - 10) + Math.cos(t*.09 + p.phase) * (1.4*p.z);
-          let x = p.x + parx, y = p.y + pary;
-          const dx = x - mx, dy = y - my; const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 180 && !reduce) {
-            const force = (1 - dist / 180) * 10 * p.z;
-            x += dx / (dist || 1) * force; y += dy / (dist || 1) * force;
-          }
-          const twinkle = .72 + Math.sin(t * (1.1 + p.tw * 20) + p.phase) * .28;
-          const blur = p.z > .82 ? 5.5 : p.z < .18 ? 1.8 : 0;
-          if (blur) ctx.shadowBlur = blur;
-          ctx.shadowColor = color(p, .95);
-          ctx.fillStyle = color(p, twinkle);
-          ctx.beginPath(); ctx.arc(x, y, p.r, 0, Math.PI * 2); ctx.fill();
-        }
-        ctx.restore();
+        const halo = ctx.createRadialGradient(cx + mouse.x * 145, cy + 12 + mouse.y * 95, 0, cx + mouse.x * 145, cy + 12 + mouse.y * 95, Math.min(w,h) * .52);
+        halo.addColorStop(0, 'rgba(210,226,255,.118)');
+        halo.addColorStop(.28, 'rgba(138,165,205,.055)');
+        halo.addColorStop(.64, 'rgba(70,90,115,.018)');
+        halo.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = halo;
+        ctx.fillRect(0,0,w,h);
+      }
 
-        // Sparse living connections around the title area only, subtle and expensive-looking.
+      function drawConnections() {
         ctx.save();
         ctx.globalCompositeOperation = 'screen';
-        ctx.lineWidth = .55;
-        const mid = particles.filter(p => p.z > .38 && p.z < .76 && Math.abs((p.y + mouse.y * 16) - cy) < h * .28);
-        for (let i = 0; i < Math.min(mid.length, 260); i++) {
+        ctx.lineWidth = .48;
+        const mid = particles.filter(p => p.z > .42 && p.z < .82 && Math.abs((p.y + mouse.y * 14) - cy) < h * .28);
+        const limit = Math.min(mid.length, 180);
+        for (let i = 0; i < limit; i++) {
           const a = mid[i];
-          const ax = a.x + mouse.x * (48 * a.z - 14), ay = a.y + mouse.y * (38 * a.z - 10);
-          for (let j = i + 1; j < Math.min(mid.length, i + 18); j++) {
+          const ax = a.x + mouse.x * (40 * a.z - 12), ay = a.y + mouse.y * (32 * a.z - 8);
+          for (let j = i + 1; j < Math.min(limit, i + 12); j++) {
             const b = mid[j];
-            const bx = b.x + mouse.x * (48 * b.z - 14), by = b.y + mouse.y * (38 * b.z - 10);
+            const bx = b.x + mouse.x * (40 * b.z - 12), by = b.y + mouse.y * (32 * b.z - 8);
             const dx = ax - bx, dy = ay - by, dd = dx*dx + dy*dy;
-            if (dd < 108*108) {
-              const alpha = (1 - Math.sqrt(dd)/108) * .105;
+            if (dd < 104*104) {
+              const alpha = (1 - Math.sqrt(dd)/104) * .09;
               ctx.strokeStyle = `rgba(220,232,255,${alpha})`;
               ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
             }
           }
         }
         ctx.restore();
+      }
 
-        // Cinematic scan glint, almost invisible.
-        const sweep = (Math.sin(t * .16) * .5 + .5) * (w + 500) - 250;
+      function drawNoise() {
+        if (!noiseCanvas || reduce) return;
+        if (frame % 4 === 0) updateNoise();
+        const pattern = ctx.createPattern(noiseCanvas, 'repeat');
+        ctx.save();
+        ctx.globalCompositeOperation = 'soft-light';
+        ctx.globalAlpha = .36;
+        const ox = -((frame * 7) % noiseSize);
+        const oy = -((frame * 3) % noiseSize);
+        ctx.translate(ox, oy);
+        ctx.fillStyle = pattern;
+        ctx.fillRect(-noiseSize, -noiseSize, w + noiseSize * 2, h + noiseSize * 2);
+        ctx.restore();
+      }
+
+      function draw(now) {
+        if (document.hidden) { requestAnimationFrame(draw); return; }
+        t = now * 0.001;
+        frame++;
+        mouse.x += (mouse.tx - mouse.x) * .07;
+        mouse.y += (mouse.ty - mouse.y) * .07;
+        background();
+
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        const mx = cx + mouse.x * cx, my = cy + mouse.y * cy;
+        for (const p of particles) {
+          if (!reduce) {
+            p.x += p.vx + Math.sin(t * .33 + p.phase) * .018 * p.z;
+            p.y += p.vy + Math.cos(t * .29 + p.phase) * .014 * p.z;
+            if (p.x < -20) p.x = w + 20; if (p.x > w + 20) p.x = -20;
+            if (p.y < -20) p.y = h + 20; if (p.y > h + 20) p.y = -20;
+          }
+          const x = p.x + mouse.x * (46 * p.z - 12) + Math.sin(t*.08 + p.phase) * (1.4*p.z);
+          const y = p.y + mouse.y * (36 * p.z - 9) + Math.cos(t*.07 + p.phase) * (1.1*p.z);
+          const dist = Math.hypot(x - mx, y - my);
+          const twinkle = .72 + Math.sin(t * (1.05 + p.z * .35) + p.phase) * .28;
+          ctx.shadowBlur = p.z > .83 ? 4.8 : p.z < .18 ? 1.4 : 0;
+          ctx.shadowColor = particleColor(p, .9);
+          ctx.fillStyle = particleColor(p, twinkle * (dist < 180 ? 1.1 : 1));
+          ctx.beginPath(); ctx.arc(x, y, p.r, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.restore();
+
+        drawConnections();
+
+        const sweep = (Math.sin(t * .13) * .5 + .5) * (w + 500) - 250;
         const lg = ctx.createLinearGradient(sweep - 160, 0, sweep + 160, h);
         lg.addColorStop(0, 'rgba(255,255,255,0)');
-        lg.addColorStop(.48, 'rgba(230,240,255,.026)');
+        lg.addColorStop(.5, 'rgba(230,240,255,.018)');
         lg.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.fillStyle = lg; ctx.fillRect(0,0,w,h);
 
+        drawNoise();
         requestAnimationFrame(draw);
       }
+
+      addEventListener('pointermove', e => {
+        mouse.tx = (e.clientX - cx) / cx;
+        mouse.ty = (e.clientY - cy) / cy;
+      }, { passive: true });
+      addEventListener('pointerleave', () => { mouse.tx = 0; mouse.ty = 0; });
+      addEventListener('resize', resize);
       resize();
       requestAnimationFrame(draw);
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const film = document.getElementById('film');
-      const fctx = film.getContext('2d', { alpha: true });
-      const tile = document.createElement('canvas');
-      const tctx = tile.getContext('2d', { alpha: true });
-      let fw = 0, fh = 0, fdpr = 1, size = 180;
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      function resizeFilm() {
-        fdpr = Math.min(devicePixelRatio || 1, 2.25);
-        fw = innerWidth; fh = innerHeight;
-        film.width = Math.floor(fw * fdpr);
-        film.height = Math.floor(fh * fdpr);
-        film.style.width = fw + 'px';
-        film.style.height = fh + 'px';
-        fctx.setTransform(fdpr,0,0,fdpr,0,0);
-        tile.width = tile.height = size;
-      }
-
-      function makeGrain() {
-        const img = tctx.createImageData(size, size);
-        const data = img.data;
-        for (let i = 0; i < data.length; i += 4) {
-          const v = 118 + Math.random() * 126;
-          const a = Math.random() < 0.72 ? Math.random() * 18 : Math.random() * 4;
-          data[i] = v; data[i + 1] = v; data[i + 2] = v; data[i + 3] = a;
-        }
-        tctx.putImageData(img, 0, 0);
-      }
-
-      function drawGrain() {
-        if (reduce) return;
-        makeGrain();
-        fctx.clearRect(0, 0, fw, fh);
-        const pattern = fctx.createPattern(tile, 'repeat');
-        fctx.save();
-        fctx.globalAlpha = 1;
-        fctx.translate(-Math.random() * size, -Math.random() * size);
-        fctx.fillStyle = pattern;
-        fctx.fillRect(-size, -size, fw + size * 2, fh + size * 2);
-        fctx.restore();
-        setTimeout(() => requestAnimationFrame(drawGrain), 42);
-      }
-
-      addEventListener('resize', resizeFilm);
-      resizeFilm();
-      drawGrain();
     })();
   </script>
 </body>

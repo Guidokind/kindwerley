@@ -1,16 +1,14 @@
 # Guido Kindwerley
 
-Founder • Pilot • Builder
+Founder · Pilot · Builder
 
 Minimalist digital identity focused on aviation, entrepreneurship and technology.
 
 ## About
 
-This repository contains the complete source code of **kindwerley.com**.
+This repository contains the source code for **kindwerley.com**.
 
-Designed as a cinematic personal website emphasizing typography, motion, performance and attention to detail.
-
-The project intentionally avoids frameworks, prioritizing simplicity, speed and timeless design.
+The site is designed as a cinematic personal landing page emphasizing typography, motion, performance and attention to detail.
 
 ## Highlights
 
@@ -18,7 +16,7 @@ The project intentionally avoids frameworks, prioritizing simplicity, speed and 
 - Responsive design
 - Canvas particle engine
 - Animated film grain
-- SEO optimized
+- Microsoft Clarity analytics
 - Open Graph preview
 - Twitter Cards
 - Schema.org structured data
@@ -33,16 +31,13 @@ The project intentionally avoids frameworks, prioritizing simplicity, speed and 
 - CSS3
 - Vanilla JavaScript
 - Canvas API
+- Schema.org
 - GitHub Pages
 - Cloudflare
 
 ## Philosophy
 
-> Simplicity is not the absence of complexity.
->
+> Simplicity is not the absence of complexity.  
 > It is the result of mastering it.
 
----
-
-© 2026 Guido Kindwerley
-
+© Guido Kindwerley
