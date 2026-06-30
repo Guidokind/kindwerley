@@ -37,7 +37,7 @@
     canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
     #film {
       position: fixed; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none;
-      opacity: .18; mix-blend-mode: soft-light;
+      opacity: .155; mix-blend-mode: soft-light;
       transform: translate3d(0,0,0);
     }
     @media (max-width: 680px) { #film { opacity: .12; } }
@@ -123,7 +123,7 @@
 
       function build() {
         const area = w * h;
-        const base = Math.round(Math.min(2600, Math.max(850, area / 1150)));
+        const base = Math.round(Math.min(3600, Math.max(1150, area / 820)));
         particles = [];
         for (let i = 0; i < base; i++) {
           const layerPick = Math.random();
@@ -134,8 +134,8 @@
             z,
             r: (Math.random() * 0.9 + 0.22) * (0.55 + z * 1.15),
             a: (Math.random() * 0.42 + 0.08) * (0.45 + z * .9),
-            vx: (Math.random() - .5) * (0.06 + z * .14),
-            vy: (Math.random() - .5) * (0.04 + z * .11),
+            vx: (Math.random() - .5) * (0.13 + z * .34),
+            vy: (Math.random() - .5) * (0.10 + z * .26),
             phase: Math.random() * Math.PI * 2,
             tw: Math.random() * .018 + .004,
             hue: Math.random() < .16 ? 'blue' : Math.random() < .18 ? 'warm' : 'white'
@@ -148,7 +148,7 @@
       addEventListener('resize', resize);
 
       function bg() {
-        const gx = cx + mouse.x * 70, gy = cy + mouse.y * 55;
+        const gx = cx + mouse.x * 105 + Math.sin(t*.18)*18, gy = cy + mouse.y * 82 + Math.cos(t*.14)*14;
         const g = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(w,h) * .78);
         g.addColorStop(0, '#101820');
         g.addColorStop(.18, '#090d11');
@@ -157,7 +157,7 @@
         ctx.fillStyle = g;
         ctx.fillRect(0,0,w,h);
 
-        const halo = ctx.createRadialGradient(cx + mouse.x * 110, cy + 12 + mouse.y * 75, 0, cx + mouse.x * 110, cy + 12 + mouse.y * 75, Math.min(w,h) * .52);
+        const halo = ctx.createRadialGradient(cx + mouse.x * 150 + Math.sin(t*.22)*22, cy + 12 + mouse.y * 105 + Math.cos(t*.19)*16, 0, cx + mouse.x * 150 + Math.sin(t*.22)*22, cy + 12 + mouse.y * 105 + Math.cos(t*.19)*16, Math.min(w,h) * .52);
         halo.addColorStop(0, 'rgba(210,226,255,.115)');
         halo.addColorStop(.26, 'rgba(138,165,205,.055)');
         halo.addColorStop(.62, 'rgba(70,90,115,.018)');
@@ -175,8 +175,8 @@
 
       function draw(now) {
         t = now * 0.001;
-        mouse.x += (mouse.tx - mouse.x) * .045;
-        mouse.y += (mouse.ty - mouse.y) * .045;
+        mouse.x += (mouse.tx - mouse.x) * .075;
+        mouse.y += (mouse.ty - mouse.y) * .075;
         bg();
 
         ctx.save();
@@ -184,12 +184,12 @@
         const mx = cx + mouse.x * cx, my = cy + mouse.y * cy;
         for (const p of particles) {
           if (!reduce) {
-            p.x += p.vx + Math.sin(t * .23 + p.phase) * .012 * p.z;
-            p.y += p.vy + Math.cos(t * .19 + p.phase) * .01 * p.z;
+            p.x += p.vx + Math.sin(t * .38 + p.phase) * .032 * p.z;
+            p.y += p.vy + Math.cos(t * .31 + p.phase) * .026 * p.z;
             if (p.x < -20) p.x = w + 20; if (p.x > w + 20) p.x = -20;
             if (p.y < -20) p.y = h + 20; if (p.y > h + 20) p.y = -20;
           }
-          const parx = mouse.x * (30 * p.z - 10), pary = mouse.y * (24 * p.z - 8);
+          const parx = mouse.x * (48 * p.z - 14) + Math.sin(t*.10 + p.phase) * (1.8*p.z), pary = mouse.y * (38 * p.z - 10) + Math.cos(t*.09 + p.phase) * (1.4*p.z);
           let x = p.x + parx, y = p.y + pary;
           const dx = x - mx, dy = y - my; const dist = Math.sqrt(dx*dx + dy*dy);
           if (dist < 180 && !reduce) {
@@ -212,13 +212,13 @@
         const mid = particles.filter(p => p.z > .38 && p.z < .76 && Math.abs((p.y + mouse.y * 16) - cy) < h * .28);
         for (let i = 0; i < Math.min(mid.length, 260); i++) {
           const a = mid[i];
-          const ax = a.x + mouse.x * (30 * a.z - 10), ay = a.y + mouse.y * (24 * a.z - 8);
+          const ax = a.x + mouse.x * (48 * a.z - 14), ay = a.y + mouse.y * (38 * a.z - 10);
           for (let j = i + 1; j < Math.min(mid.length, i + 18); j++) {
             const b = mid[j];
-            const bx = b.x + mouse.x * (30 * b.z - 10), by = b.y + mouse.y * (24 * b.z - 8);
+            const bx = b.x + mouse.x * (48 * b.z - 14), by = b.y + mouse.y * (38 * b.z - 10);
             const dx = ax - bx, dy = ay - by, dd = dx*dx + dy*dy;
-            if (dd < 92*92) {
-              const alpha = (1 - Math.sqrt(dd)/92) * .075;
+            if (dd < 108*108) {
+              const alpha = (1 - Math.sqrt(dd)/108) * .105;
               ctx.strokeStyle = `rgba(220,232,255,${alpha})`;
               ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
             }
@@ -230,7 +230,7 @@
         const sweep = (Math.sin(t * .16) * .5 + .5) * (w + 500) - 250;
         const lg = ctx.createLinearGradient(sweep - 160, 0, sweep + 160, h);
         lg.addColorStop(0, 'rgba(255,255,255,0)');
-        lg.addColorStop(.48, 'rgba(230,240,255,.018)');
+        lg.addColorStop(.48, 'rgba(230,240,255,.026)');
         lg.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.fillStyle = lg; ctx.fillRect(0,0,w,h);
 
@@ -247,7 +247,7 @@
       const fctx = film.getContext('2d', { alpha: true });
       const tile = document.createElement('canvas');
       const tctx = tile.getContext('2d', { alpha: true });
-      let fw = 0, fh = 0, fdpr = 1, size = 220;
+      let fw = 0, fh = 0, fdpr = 1, size = 180;
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       function resizeFilm() {
@@ -266,7 +266,7 @@
         const data = img.data;
         for (let i = 0; i < data.length; i += 4) {
           const v = 118 + Math.random() * 126;
-          const a = Math.random() < 0.68 ? Math.random() * 28 : Math.random() * 5;
+          const a = Math.random() < 0.72 ? Math.random() * 18 : Math.random() * 4;
           data[i] = v; data[i + 1] = v; data[i + 2] = v; data[i + 3] = a;
         }
         tctx.putImageData(img, 0, 0);
@@ -283,7 +283,7 @@
         fctx.fillStyle = pattern;
         fctx.fillRect(-size, -size, fw + size * 2, fh + size * 2);
         fctx.restore();
-        setTimeout(() => requestAnimationFrame(drawGrain), 72);
+        setTimeout(() => requestAnimationFrame(drawGrain), 42);
       }
 
       addEventListener('resize', resizeFilm);
