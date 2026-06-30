@@ -1,52 +1,47 @@
-Guido Kindwerley
+# Guido Kindwerley
 
 Founder • Pilot • Builder
 
-Minimalist personal website focused on identity, performance and digital presence.
+Minimalist digital identity focused on aviation, entrepreneurship and technology.
 
-About
+## About
 
-This repository contains the source code for kindwerley.com.
+This repository contains the complete source code of **kindwerley.com**.
 
-Designed as a cinematic, ultra-minimal personal landing page with emphasis on motion, typography and visual identity.
+Designed as a cinematic personal website emphasizing typography, motion, performance and attention to detail.
 
-Built to provide a fast, elegant and future-proof web presence.
+The project intentionally avoids frameworks, prioritizing simplicity, speed and timeless design.
 
-Features
-Cinematic particle engine
-Animated film grain
-Responsive layout
-Open Graph preview
-Twitter Cards
-Structured Data (Schema.org)
-XML Sitemap
-Robots.txt
-SEO optimized
-Cloudflare CDN
-GitHub Pages deployment
-Tech Stack
-HTML5
-CSS3
-Vanilla JavaScript
-Canvas API
-Schema.org
-GitHub Pages
-Cloudflare
-Performance
-Lightweight
-No frameworks
-Optimized animations
-GPU accelerated rendering
-Mobile first
-Status
+## Highlights
 
-Actively maintained.
+- Cinematic landing page
+- Responsive design
+- Canvas particle engine
+- Animated film grain
+- SEO optimized
+- Open Graph preview
+- Twitter Cards
+- Schema.org structured data
+- XML sitemap
+- Robots.txt
+- Cloudflare CDN
+- GitHub Pages deployment
 
-Continuous improvements in visual design, performance and search engine optimization.
+## Stack
 
-Philosophy
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Canvas API
+- GitHub Pages
+- Cloudflare
 
-Simplicity is not the absence of complexity.
-It is the result of mastering it.
+## Philosophy
+
+> Simplicity is not the absence of complexity.
+>
+> It is the result of mastering it.
+
+---
 
 © 2026 Guido Kindwerley
