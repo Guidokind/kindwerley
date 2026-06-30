@@ -1,43 +1,18 @@
 # Guido Kindwerley
 
-Founder • Pilot • Builder
+Founder · Pilot · Builder
 
-Minimalist personal website focused on identity, performance and digital presence.
+Minimal personal website for kindwerley.com.
 
-## About
+## Features
 
-This repository contains the source code for **kindwerley.com**.
-
-The site is designed as a cinematic, ultra-minimal personal landing page emphasizing typography, atmosphere, performance and attention to detail.
-
-## Highlights
-
-- Minimal cinematic landing page
-- Real HTML content for accessibility and SEO
-- CSS-first atmospheric background
-- Subtle animated star layers
-- Lightweight production build
+- Static HTML/CSS
+- CSS-first animated atmosphere
 - Open Graph preview
-- Twitter Cards
-- Schema.org structured data
-- XML sitemap
-- Robots.txt
-- Microsoft Clarity analytics
-- GitHub Pages deployment
-- Cloudflare CDN
+- Bilingual Schema.org structured data
+- Microsoft Clarity
+- GitHub Pages + Cloudflare
 
-## Stack
+## Status
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- GitHub Pages
-- Cloudflare
-
-## Philosophy
-
-> Simplicity is not the absence of complexity.
->
-> It is the result of mastering it.
-
-© Guido Kindwerley
+Production.
