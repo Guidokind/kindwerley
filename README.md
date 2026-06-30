@@ -8,22 +8,21 @@ Minimalist digital identity focused on aviation, entrepreneurship and technology
 
 This repository contains the source code for **kindwerley.com**.
 
-The site is designed as a cinematic personal landing page emphasizing typography, motion, performance and attention to detail.
+The site is designed as a cinematic personal landing page with emphasis on typography, atmosphere, performance and search visibility.
 
 ## Highlights
 
 - Cinematic landing page
+- Lightweight canvas atmosphere
 - Responsive design
-- Canvas particle engine
-- Animated film grain
-- Microsoft Clarity analytics
 - Open Graph preview
 - Twitter Cards
 - Schema.org structured data
 - XML sitemap
 - Robots.txt
-- Cloudflare CDN
+- Microsoft Clarity analytics
 - GitHub Pages deployment
+- Cloudflare delivery
 
 ## Stack
 
@@ -31,7 +30,6 @@ The site is designed as a cinematic personal landing page emphasizing typography
 - CSS3
 - Vanilla JavaScript
 - Canvas API
-- Schema.org
 - GitHub Pages
 - Cloudflare
 
