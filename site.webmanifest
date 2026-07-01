@@ -1,6 +1,6 @@
 {
-  "name": "Guido Kindwerley",
-  "short_name": "Kindwerley",
+  "name": "Sudamericana",
+  "short_name": "Sudamericana",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#020304",
-  "background_color": "#020304",
+  "theme_color": "#316836",
+  "background_color": "#fbfaf7",
   "display": "standalone"
 }
