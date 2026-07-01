@@ -7,12 +7,8 @@ Minimal personal website for kindwerley.com.
 ## Features
 
 - Static HTML/CSS
-- CSS-first animated atmosphere
+- Canvas-inspired atmospheric background
 - Open Graph preview
-- Bilingual Schema.org structured data
+- Schema.org structured data
 - Microsoft Clarity
 - GitHub Pages + Cloudflare
-
-## Status
-
-Production.
