@@ -1,39 +1,19 @@
-# Kindwerley — Photographic Dynamic Sky v3
-
-Minimal personal landing page with a full-screen photographic sky that changes according to the visitor's local device time.
-
-## What changed in v3
-
-- Replaced the synthetic CSS sky and clouds with five high-resolution photographic scenes.
-- Smooth crossfades between night, dawn, daytime, golden hour and dusk.
-- Separate optimized WebP crops for desktop and mobile.
-- Only the two scenes needed for the current transition are loaded.
-- Kept the optional local-weather mode with subtle overcast, fog, rain, snow and storm treatments.
-- Kept the original centered name and subtitle treatment.
-
-## Time previews
-
-Append `?time=HH:MM` to the URL:
-
-- `?time=03:00` — night
-- `?time=06:00` — dawn
-- `?time=12:00` — daytime
-- `?time=18:00` — golden hour
-- `?time=20:00` — dusk
-
-## Weather previews
-
-Append `?weather=STATE`:
-
-- `clear`
-- `cloudy`
-- `overcast`
-- `fog`
-- `drizzle`
-- `rain`
-- `snow`
-- `storm`
-
-Time and weather parameters can be combined:
-
-`?time=18:30&weather=storm`
+{
+  "name": "Guido Kindwerley",
+  "short_name": "Kindwerley",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#061426",
+  "background_color": "#061426",
+  "display": "standalone"
+}

@@ -1,9 +1,7 @@
-# Sky photography credits
-
-The photographic backgrounds are included under the Unsplash License.
-
-- Night sky — NIR HIMI: https://unsplash.com/photos/j6HQqzKCyfc
-- Dawn cloud layer — Henrique Ferreira: https://unsplash.com/photos/8xXeYkZMm-c
-- Day cloudscape — HYEWON HWANG: https://unsplash.com/photos/7imG-DPNL5o
-- Golden hour — Tim Johnson: https://unsplash.com/photos/430Ad4CRkhk
-- Dusk cloudscape — Jerry Zhang: https://unsplash.com/photos/aQx1sz3cbpQ
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <filter id="g" x="-80%" y="-80%" width="260%" height="260%">
+    <feGaussianBlur stdDeviation="1.05" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="800" fill="#f7f9fb" filter="url(#g)">K</text>
+</svg>
