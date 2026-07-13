@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Guido Kindwerley</title>
-  <meta name="description" content="Guido Kindwerley — Founder · Pilot · Builder">
+  <title>Guido Kindwerley — Co-Founder of Wingsburg</title>
+  <meta name="description" content="Guido Kindwerley — Co-Founder of Wingsburg, commercial pilot and builder.">
   <meta name="author" content="Guido Kindwerley">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#061426">
   <link rel="canonical" href="https://kindwerley.com/">
 
-  <meta property="og:title" content="Guido Kindwerley">
-  <meta property="og:description" content="Founder · Pilot · Builder">
+  <meta property="og:title" content="Guido Kindwerley — Co-Founder of Wingsburg">
+  <meta property="og:description" content="Co-Founder of Wingsburg · Commercial Pilot · Builder">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kindwerley.com/">
   <meta property="og:image" content="https://kindwerley.com/preview.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Guido Kindwerley">
-  <meta name="twitter:description" content="Founder · Pilot · Builder">
+  <meta name="twitter:title" content="Guido Kindwerley — Co-Founder of Wingsburg">
+  <meta name="twitter:description" content="Co-Founder of Wingsburg · Commercial Pilot · Builder">
   <meta name="twitter:image" content="https://kindwerley.com/preview.jpg">
 
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
@@ -36,17 +36,48 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Guido Alejandro Kindwerley",
-    "alternateName": "Guido Kindwerley",
-    "url": "https://kindwerley.com/",
-    "image": "https://kindwerley.com/preview.jpg",
-    "jobTitle": ["Founder", "Commercial Pilot", "Agricultural Aviation Pilot"],
-    "sameAs": [
-      "https://github.com/Guidokind",
-      "https://www.instagram.com/guidokind/",
-      "https://x.com/guidokind",
-      "https://www.linkedin.com/in/guidokind/"
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": "https://kindwerley.com/#profile-page",
+        "url": "https://kindwerley.com/",
+        "name": "Guido Kindwerley — Co-Founder of Wingsburg",
+        "description": "Personal website of Guido Kindwerley, co-founder of Wingsburg, commercial pilot and builder.",
+        "mainEntity": {
+          "@id": "https://kindwerley.com/#guido-kindwerley"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://kindwerley.com/#guido-kindwerley",
+        "name": "Guido Alejandro Kindwerley",
+        "alternateName": "Guido Kindwerley",
+        "url": "https://kindwerley.com/",
+        "description": "Co-founder of Wingsburg, commercial pilot and builder.",
+        "jobTitle": [
+          "Co-Founder of Wingsburg",
+          "Commercial Pilot"
+        ],
+        "worksFor": {
+          "@id": "https://wingsburg.com/#organization"
+        },
+        "sameAs": [
+          "https://github.com/Guidokind",
+          "https://www.instagram.com/guidokind/",
+          "https://x.com/guidokind",
+          "https://www.linkedin.com/in/guidokind/"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://wingsburg.com/#organization",
+        "name": "Wingsburg",
+        "url": "https://wingsburg.com/",
+        "description": "An operations agent for private aviation.",
+        "founder": {
+          "@id": "https://kindwerley.com/#guido-kindwerley"
+        }
+      }
     ]
   }
   </script>
