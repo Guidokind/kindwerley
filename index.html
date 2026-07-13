@@ -31,7 +31,7 @@
 
   <link rel="preload" as="image" href="./assets/sky/day-premium-v3.webp" media="(min-width: 761px)">
   <link rel="preload" as="image" href="./assets/sky/day-premium-v3-mobile.webp" media="(max-width: 760px)">
-  <link rel="stylesheet" href="./style.css?v=20260713-4">
+  <link rel="stylesheet" href="./style.css?v=20260713-5">
 
   <script type="application/ld+json">
   {
@@ -56,17 +56,18 @@
     <div class="sky__layer sky__layer--a" id="sky-a"></div>
     <div class="sky__layer sky__layer--b" id="sky-b"></div>
 
-    <div class="sky__motion sky__motion--one">
-      <div class="sky__motion-track sky__motion-track--one"></div>
-      <div class="sky__motion-track sky__motion-track--two"></div>
-    </div>
-    <div class="sky__motion sky__motion--two">
-      <div class="sky__motion-track sky__motion-track--one"></div>
-      <div class="sky__motion-track sky__motion-track--two"></div>
-    </div>
-
     <div class="sky__stars sky__stars--one"></div>
     <div class="sky__stars sky__stars--two"></div>
+
+    <div class="sky__clouds sky__clouds--back">
+      <div class="sky__cloud-track sky__cloud-track--one"></div>
+      <div class="sky__cloud-track sky__cloud-track--two"></div>
+    </div>
+
+    <div class="sky__clouds sky__clouds--front">
+      <div class="sky__cloud-track sky__cloud-track--one"></div>
+      <div class="sky__cloud-track sky__cloud-track--two"></div>
+    </div>
 
     <div class="sky__veil"></div>
     <div class="sky__grain"></div>
@@ -85,11 +86,11 @@
   <noscript>
     <style>
       .sky__layer--a { background-image: url('./assets/sky/day-premium-v3.webp'); opacity: 1; }
-      .sky__layer--b, .sky__motion, .sky__stars { display: none; }
+      .sky__layer--b, .sky__stars, .sky__clouds { display: none; }
     </style>
   </noscript>
 
-  <script src="./sky.js?v=20260713-4" defer></script>
+  <script src="./sky.js?v=20260713-5" defer></script>
   <script>
     window.addEventListener('load', () => {
       setTimeout(() => {

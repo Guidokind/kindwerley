@@ -1,7 +1,7 @@
 .nojekyll	0 bytes
 CNAME	15 bytes
 FILE-MANIFEST.txt	0 bytes
-README.md	1115 bytes
+README.md	1082 bytes
 android-chrome-192x192.png	15057 bytes
 android-chrome-512x512.png	57156 bytes
 apple-touch-icon.png	14227 bytes
@@ -19,11 +19,11 @@ favicon-16x16.png	561 bytes
 favicon-32x32.png	1275 bytes
 favicon.ico	38411 bytes
 favicon.svg	462 bytes
-index.html	4102 bytes
+index.html	4098 bytes
 preview.jpg	87166 bytes
 preview.png	650975 bytes
 robots.txt	68 bytes
 site.webmanifest	383 bytes
 sitemap.xml	232 bytes
-sky.js	4005 bytes
-style.css	9229 bytes
+sky.js	5387 bytes
+style.css	9965 bytes

@@ -1,16 +1,26 @@
-# Kindwerley Premium Sky v4
+# Kindwerley Premium Sky v5
 
-Landing page package for `kindwerley.com` with premium realistic sky backgrounds and subtle long-duration motion.
+Landing page package for `kindwerley.com` with realistic premium sky backgrounds, corrected layer composition, and subtle layered motion.
 
-## What's new in v4
+## What's new in v5
 
-- Keeps the premium sky system from v3.
-- Adds ultra-subtle continuous motion so the background feels alive.
-- Main background drift loop: **300 seconds**.
-- Secondary cloud haze loop: **210 seconds** and **300 seconds**.
-- Gentle breathing / micro zoom loop: **180–210 seconds**.
-- Night stars now have a very soft twinkle and faint drift.
-- Motion respects `prefers-reduced-motion`.
+- Stars are now isolated to the **upper sky only**.
+- Stars no longer sit visually on top of the cloud horizon.
+- Layered composition:
+  - background sky image
+  - star field behind the horizon zone
+  - back cloud atmosphere
+  - front cloud atmosphere
+  - text on top
+- Motion is still premium and subtle, but more perceptible than v4.
+- Different motion speeds per layer for a more natural result.
+
+## Motion system
+
+- Main sky drift: **300s**
+- Back cloud layer: **260s / 320s**
+- Front cloud layer: **180s / 240s**
+- Star twinkle drift: **120s / 170s**
 
 ## Manual scene testing
 
@@ -27,21 +37,6 @@ You can also combine it with:
 - `?time=18:20`
 - `?time=23:10`
 
-Examples:
-
-- `https://kindwerley.com/?scene=night`
-- `https://kindwerley.com/?time=18:20`
-
-## Files to keep at the repository root
-
-- `index.html`
-- `style.css`
-- `sky.js`
-- `CNAME`
-- `preview.jpg`
-- `preview.png`
-- `assets/sky/...`
-
 ## Upload note
 
-Replace the site contents with the files in this package. Do not upload the ZIP itself into the repository.
+Replace the current site files with the contents of this package. Do not upload the ZIP itself into the repository.

@@ -79,17 +79,43 @@
     });
   }
 
-  function nightWeight(scene) {
-    if (scene.from === 'night' && scene.to === 'night') return 1;
-    if (scene.from === 'night') return 1 - scene.mix;
-    if (scene.to === 'night') return scene.mix;
-    if (scene.from === 'dusk' || scene.to === 'dawn') return 0.35;
+  function weightedSceneValue(scene, name) {
+    if (scene.from === name && scene.to === name) return 1;
+    if (scene.from === name) return 1 - scene.mix;
+    if (scene.to === name) return scene.mix;
     return 0;
   }
 
-  function sceneLabel(scene) {
-    if (scene.mix < 0.5) return scene.from;
-    return scene.to;
+  function dominantLabel(scene) {
+    return scene.mix < 0.5 ? scene.from : scene.to;
+  }
+
+  function starVisibility(scene) {
+    const night = weightedSceneValue(scene, 'night');
+    const dawn = weightedSceneValue(scene, 'dawn');
+    const dusk = weightedSceneValue(scene, 'dusk');
+    const day = weightedSceneValue(scene, 'day');
+    const golden = weightedSceneValue(scene, 'golden');
+
+    return clamp(night * 0.22 + dawn * 0.04 + dusk * 0.08 - day * 0.06 - golden * 0.08, 0, 0.24);
+  }
+
+  function backCloudVisibility(scene) {
+    const dawn = weightedSceneValue(scene, 'dawn');
+    const day = weightedSceneValue(scene, 'day');
+    const golden = weightedSceneValue(scene, 'golden');
+    const dusk = weightedSceneValue(scene, 'dusk');
+    const night = weightedSceneValue(scene, 'night');
+    return clamp(0.05 + dawn * 0.01 + day * 0.015 + golden * 0.018 + dusk * 0.012 - night * 0.008, 0.04, 0.09);
+  }
+
+  function frontCloudVisibility(scene) {
+    const dawn = weightedSceneValue(scene, 'dawn');
+    const day = weightedSceneValue(scene, 'day');
+    const golden = weightedSceneValue(scene, 'golden');
+    const dusk = weightedSceneValue(scene, 'dusk');
+    const night = weightedSceneValue(scene, 'night');
+    return clamp(0.075 + dawn * 0.015 + day * 0.018 + golden * 0.024 + dusk * 0.018 - night * 0.015, 0.06, 0.12);
   }
 
   async function render() {
@@ -107,9 +133,10 @@
     layers[0].style.opacity = String(1 - scene.mix);
     layers[1].style.opacity = String(scene.mix);
 
-    const label = sceneLabel(scene);
-    document.documentElement.dataset.sky = label;
-    document.documentElement.style.setProperty('--night-visibility', String((0.02 + nightWeight(scene) * 0.23).toFixed(3)));
+    document.documentElement.dataset.sky = dominantLabel(scene);
+    document.documentElement.style.setProperty('--star-visibility', String(starVisibility(scene).toFixed(3)));
+    document.documentElement.style.setProperty('--back-cloud-visibility', String(backCloudVisibility(scene).toFixed(3)));
+    document.documentElement.style.setProperty('--front-cloud-visibility', String(frontCloudVisibility(scene).toFixed(3)));
   }
 
   render();
