@@ -1,34 +1,47 @@
-# Kindwerley Premium Sky v3
+# Kindwerley Premium Sky v4
 
-Clean GitHub Pages repository for `kindwerley.com`.
+Landing page package for `kindwerley.com` with premium realistic sky backgrounds and subtle long-duration motion.
 
-## Upload correctly
+## What's new in v4
 
-1. Extract the ZIP on your computer.
-2. In the GitHub repository, delete the old website files.
-3. Upload **all files and the complete `assets` folder** from inside this package to the repository root.
-4. Confirm that `index.html`, `style.css`, `sky.js`, `CNAME` and `assets/sky/...` appear at the same repository level.
-5. Wait for GitHub Pages / Cloudflare to deploy, then open the site in a private window.
+- Keeps the premium sky system from v3.
+- Adds ultra-subtle continuous motion so the background feels alive.
+- Main background drift loop: **300 seconds**.
+- Secondary cloud haze loop: **210 seconds** and **300 seconds**.
+- Gentle breathing / micro zoom loop: **180–210 seconds**.
+- Night stars now have a very soft twinkle and faint drift.
+- Motion respects `prefers-reduced-motion`.
 
-Do not upload the ZIP itself and do not place the extracted folder inside another folder.
+## Manual scene testing
 
-## Testing scenes
+- `?scene=dawn`
+- `?scene=day`
+- `?scene=golden`
+- `?scene=dusk`
+- `?scene=night`
 
-- `/?scene=dawn`
-- `/?scene=day`
-- `/?scene=golden`
-- `/?scene=dusk`
-- `/?scene=night`
+You can also combine it with:
 
-Testing exact local times:
+- `?time=06:15`
+- `?time=12:00`
+- `?time=18:20`
+- `?time=23:10`
 
-- `/?time=06:00`
-- `/?time=12:00`
-- `/?time=18:30`
-- `/?time=23:00`
+Examples:
 
-Remove the query parameter for normal automatic operation.
+- `https://kindwerley.com/?scene=night`
+- `https://kindwerley.com/?time=18:20`
 
-## Important
+## Files to keep at the repository root
 
-This version intentionally removes the artificial weather effects. It uses five photographic backgrounds and smooth time-based transitions. The asset names and cache-busting version are new so browsers do not keep the broken previous background.
+- `index.html`
+- `style.css`
+- `sky.js`
+- `CNAME`
+- `preview.jpg`
+- `preview.png`
+- `assets/sky/...`
+
+## Upload note
+
+Replace the site contents with the files in this package. Do not upload the ZIP itself into the repository.

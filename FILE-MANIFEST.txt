@@ -1,28 +1,29 @@
-.nojekyll	0
-CNAME	15
-README.md	1129
-android-chrome-192x192.png	15057
-android-chrome-512x512.png	57156
-apple-touch-icon.png	14227
-assets/sky/dawn-premium-v3-mobile.webp	42510
-assets/sky/dawn-premium-v3.webp	56718
-assets/sky/day-premium-v3-mobile.webp	33156
-assets/sky/day-premium-v3.webp	51052
-assets/sky/dusk-premium-v3-mobile.webp	39004
-assets/sky/dusk-premium-v3.webp	53158
-assets/sky/golden-premium-v3-mobile.webp	51254
-assets/sky/golden-premium-v3.webp	71594
-assets/sky/night-premium-v3-mobile.webp	20344
-assets/sky/night-premium-v3.webp	29990
-favicon-16x16.png	561
-favicon-32x32.png	1275
-favicon.ico	38411
-favicon.svg	462
-index.html	3526
-preview.jpg	87166
-preview.png	650975
-robots.txt	68
-site.webmanifest	383
-sitemap.xml	232
-sky.js	3499
-style.css	4120
+.nojekyll	0 bytes
+CNAME	15 bytes
+FILE-MANIFEST.txt	0 bytes
+README.md	1115 bytes
+android-chrome-192x192.png	15057 bytes
+android-chrome-512x512.png	57156 bytes
+apple-touch-icon.png	14227 bytes
+assets/sky/dawn-premium-v3-mobile.webp	42510 bytes
+assets/sky/dawn-premium-v3.webp	56718 bytes
+assets/sky/day-premium-v3-mobile.webp	33156 bytes
+assets/sky/day-premium-v3.webp	51052 bytes
+assets/sky/dusk-premium-v3-mobile.webp	39004 bytes
+assets/sky/dusk-premium-v3.webp	53158 bytes
+assets/sky/golden-premium-v3-mobile.webp	51254 bytes
+assets/sky/golden-premium-v3.webp	71594 bytes
+assets/sky/night-premium-v3-mobile.webp	20344 bytes
+assets/sky/night-premium-v3.webp	29990 bytes
+favicon-16x16.png	561 bytes
+favicon-32x32.png	1275 bytes
+favicon.ico	38411 bytes
+favicon.svg	462 bytes
+index.html	4102 bytes
+preview.jpg	87166 bytes
+preview.png	650975 bytes
+robots.txt	68 bytes
+site.webmanifest	383 bytes
+sitemap.xml	232 bytes
+sky.js	4005 bytes
+style.css	9229 bytes
