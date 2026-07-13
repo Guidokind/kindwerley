@@ -1,6 +1,6 @@
 # kindwerley.com
 
-Personal website of **Guido Kindwerley** — co-founder of [Wingsburg](https://wingsburg.com), commercial pilot and builder.
+Personal website of **Guido Kindwerley** — co-founder of Wingsburg, commercial pilot and builder.
 
 ## Website
 
@@ -19,5 +19,3 @@ A minimalist personal landing page with a cinematic sky that adapts to the visit
 - Structured data for personal identity and professional affiliation
 
 ## Related
-
-[Wingsburg](https://wingsburg.com) — operations agent for private aviation.
