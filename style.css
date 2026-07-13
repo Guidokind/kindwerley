@@ -321,3 +321,246 @@ h1 {
     transition-duration: 0ms;
   }
 }
+
+/* Optional local-weather layer. The time-based sky remains the fallback. */
+:root {
+  --weather-cloud-add: 0;
+  --weather-cloud-brightness: 1;
+  --weather-saturation: 1;
+  --weather-overcast: 0;
+  --weather-fog: 0;
+  --weather-rain: 0;
+  --weather-snow: 0;
+  --weather-storm: 0;
+  --weather-dim: 0;
+  --rain-speed: 780ms;
+  --snow-speed: 15s;
+  --cloud-far-duration: 115s;
+  --cloud-near-duration: 82s;
+}
+
+.clouds {
+  opacity: clamp(0, calc(var(--cloud-opacity) + var(--weather-cloud-add)), .9);
+  filter:
+    brightness(calc(var(--cloud-brightness) * var(--weather-cloud-brightness)))
+    saturate(var(--weather-saturation));
+}
+
+.clouds--far {
+  animation-duration: var(--cloud-far-duration);
+}
+
+.clouds--near {
+  animation-duration: var(--cloud-near-duration);
+}
+
+.weather-layer {
+  z-index: 7;
+  opacity: 0;
+  transition: opacity 1800ms ease, filter 1800ms ease;
+  will-change: opacity, transform;
+}
+
+.weather-overcast {
+  opacity: var(--weather-overcast);
+  background:
+    radial-gradient(ellipse 85% 55% at 18% 12%, rgba(38, 49, 63, .76), transparent 72%),
+    radial-gradient(ellipse 100% 65% at 82% 17%, rgba(47, 58, 70, .70), transparent 70%),
+    linear-gradient(to bottom, rgba(20, 28, 39, .50), rgba(31, 39, 49, .22) 58%, rgba(16, 22, 30, .18));
+  mix-blend-mode: multiply;
+}
+
+.weather-fog {
+  z-index: 8;
+  opacity: var(--weather-fog);
+  background:
+    radial-gradient(ellipse 95% 42% at 26% 73%, rgba(232, 239, 243, .60), transparent 72%),
+    radial-gradient(ellipse 105% 46% at 78% 61%, rgba(226, 235, 240, .52), transparent 74%),
+    linear-gradient(to top, rgba(222, 231, 236, .35), transparent 72%);
+  filter: blur(17px);
+  animation: fog-drift 26s ease-in-out infinite alternate;
+}
+
+.weather-rain {
+  z-index: 9;
+  opacity: var(--weather-rain);
+  inset: -25% -10%;
+  background-image:
+    repeating-linear-gradient(
+      106deg,
+      transparent 0 22px,
+      rgba(224, 238, 249, .32) 22.5px 23.3px,
+      transparent 24px 47px
+    );
+  background-size: 150px 210px;
+  filter: blur(.25px);
+  animation: rain-fall var(--rain-speed) linear infinite;
+}
+
+.weather-rain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      106deg,
+      transparent 0 39px,
+      rgba(221, 236, 247, .20) 39.5px 40.4px,
+      transparent 41px 76px
+    );
+  background-size: 220px 290px;
+  animation: rain-fall calc(var(--rain-speed) * 1.35) linear infinite reverse;
+}
+
+.weather-snow {
+  z-index: 9;
+  opacity: var(--weather-snow);
+  inset: -20% -5%;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.82) 0 1.2px, transparent 1.7px),
+    radial-gradient(circle, rgba(241,247,250,.72) 0 1.8px, transparent 2.3px),
+    radial-gradient(circle, rgba(255,255,255,.55) 0 .8px, transparent 1.3px);
+  background-size: 94px 112px, 151px 173px, 63px 78px;
+  background-position: 11px 7px, 46px 31px, 28px 13px;
+  animation: snow-fall var(--snow-speed) linear infinite;
+}
+
+.weather-lightning {
+  z-index: 9;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 72% 19%, rgba(239, 246, 255, .95), rgba(198, 219, 255, .34) 17%, transparent 47%);
+  mix-blend-mode: screen;
+}
+
+html.weather-storm .weather-lightning {
+  animation: lightning-flash 13s steps(1, end) infinite;
+}
+
+.cinematic-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: var(--weather-dim);
+  background: rgba(3, 8, 15, .62);
+  transition: opacity 1800ms ease;
+}
+
+.weather-toggle {
+  position: fixed;
+  right: 25px;
+  bottom: 24px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(249, 251, 253, .42);
+  background: rgba(4, 10, 18, .07);
+  font: inherit;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 5px rgba(0,0,0,.55);
+  cursor: pointer;
+  opacity: .72;
+  transition: color 240ms ease, opacity 240ms ease, background 240ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.weather-toggle:hover,
+.weather-toggle:focus-visible {
+  color: rgba(249, 251, 253, .84);
+  background: rgba(4, 10, 18, .24);
+  opacity: 1;
+  outline: none;
+}
+
+.weather-toggle:focus-visible {
+  box-shadow: 0 0 0 1px rgba(255,255,255,.38);
+}
+
+.weather-toggle[aria-pressed="true"] {
+  color: rgba(249, 251, 253, .62);
+}
+
+.weather-toggle:disabled {
+  cursor: default;
+  opacity: .28;
+}
+
+.weather-toggle__dot {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 7px currentColor;
+}
+
+.weather-toggle.is-loading .weather-toggle__dot {
+  animation: weather-pulse 1s ease-in-out infinite;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@keyframes fog-drift {
+  from { transform: translate3d(-2.5%, 1%, 0) scale(1.04); }
+  to { transform: translate3d(2.5%, -1%, 0) scale(1.09); }
+}
+
+@keyframes rain-fall {
+  from { transform: translate3d(-2%, -12%, 0); }
+  to { transform: translate3d(2%, 12%, 0); }
+}
+
+@keyframes snow-fall {
+  from { transform: translate3d(-1.5%, -8%, 0); }
+  to { transform: translate3d(1.5%, 8%, 0); }
+}
+
+@keyframes lightning-flash {
+  0%, 88%, 91%, 93%, 100% { opacity: 0; }
+  89% { opacity: calc(var(--weather-storm) * .82); }
+  90% { opacity: calc(var(--weather-storm) * .15); }
+  92% { opacity: calc(var(--weather-storm) * .52); }
+}
+
+@keyframes weather-pulse {
+  0%, 100% { opacity: .28; transform: scale(.78); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+@media (max-width: 680px) {
+  .weather-toggle {
+    right: 14px;
+    bottom: 13px;
+    min-height: 34px;
+    padding: 7px 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weather-fog,
+  .weather-rain,
+  .weather-rain::after,
+  .weather-snow,
+  html.weather-storm .weather-lightning,
+  .weather-toggle.is-loading .weather-toggle__dot {
+    animation: none;
+  }
+}

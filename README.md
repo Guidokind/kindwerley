@@ -1,38 +1,37 @@
-# Guido Kindwerley — Dynamic Sky v1
+# Kindwerley — Dynamic Sky v2
 
-Minimal personal website for kindwerley.com.
+Minimal personal landing page with a continuous sky cycle based on the visitor's local device time.
 
-## Dynamic background
+## New in v2
 
-The background uses the visitor's local device time and continuously interpolates between:
+- Optional local-weather mode using browser geolocation and Open-Meteo current conditions.
+- No location prompt on first load: the visitor activates it through the small **Local weather** control.
+- The choice is remembered locally after permission is granted.
+- Graceful fallback: if permission, connectivity, or the API fails, the time-based sky continues unchanged.
+- Subtle visual states for cloud, overcast, fog, drizzle, rain, snow and thunderstorm.
 
-- Night
-- Dawn
-- Morning
-- Midday
-- Late afternoon
-- Sunset
-- Dusk
+## Time previews
 
-It is built entirely with HTML, CSS and JavaScript. No geolocation permission, weather API, images or video are required.
+Append `?time=HH:MM` to the URL, for example:
 
-## Test a specific time
+- `?time=06:00`
+- `?time=12:00`
+- `?time=18:30`
+- `?time=23:00`
 
-Add `?time=` to the URL:
+## Weather previews
 
-- `/?time=6:00`
-- `/?time=12:00`
-- `/?time=18:30`
-- `/?time=23:00`
+Append `?weather=STATE` to test the visual states without location access:
 
-Decimal values also work, such as `/?time=19.5`.
+- `clear`
+- `cloudy`
+- `overcast`
+- `fog`
+- `drizzle`
+- `rain`
+- `snow`
+- `storm`
 
-## Files
+Time and weather parameters can be combined, for example:
 
-- `index.html` — content, metadata and structured data
-- `style.css` — sky, clouds, stars and typography
-- `sky.js` — local-time interpolation
-
-## Deployment
-
-Upload all files to the root of the GitHub repository. GitHub Pages and Cloudflare can continue using the existing configuration.
+`?time=18:30&weather=storm`

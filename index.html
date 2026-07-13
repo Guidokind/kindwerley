@@ -182,6 +182,11 @@
     <div class="horizon-glow"></div>
     <div class="clouds clouds--far"></div>
     <div class="clouds clouds--near"></div>
+    <div class="weather-layer weather-overcast"></div>
+    <div class="weather-layer weather-fog"></div>
+    <div class="weather-layer weather-rain"></div>
+    <div class="weather-layer weather-snow"></div>
+    <div class="weather-layer weather-lightning"></div>
   </div>
 
   <div class="cinematic-overlay" aria-hidden="true"></div>
@@ -196,7 +201,14 @@
 
   <div class="corner" aria-hidden="true">Kindwerley.com</div>
 
+  <button class="weather-toggle" id="weather-toggle" type="button" aria-describedby="weather-status">
+    <span class="weather-toggle__dot" aria-hidden="true"></span>
+    <span class="weather-toggle__label">Local weather</span>
+  </button>
+  <p class="visually-hidden" id="weather-status" aria-live="polite"></p>
+
   <script src="/sky.js"></script>
+  <script src="/weather.js"></script>
   <script>
     (() => {
       const loadClarity = () => {
