@@ -254,6 +254,34 @@ h1 {
   text-shadow: 0 2px 14px rgba(0,8,22,.32);
 }
 
+.identity__cta {
+  display: inline-block;
+  margin: clamp(1.9rem, 3.2vw, 2.6rem) auto 0;
+  padding: .9em 2.1em;
+  pointer-events: auto;
+  color: var(--white);
+  font-size: clamp(.56rem, .74vw, .74rem);
+  font-weight: 570;
+  letter-spacing: clamp(.16rem, .38vw, .3rem);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.4);
+  border-radius: 999px;
+  transition: border-color .25s ease, background-color .25s ease, transform .25s ease;
+}
+
+.identity__cta:hover,
+.identity__cta:focus-visible {
+  border-color: rgba(255,255,255,.85);
+  background: rgba(255,255,255,.08);
+  transform: translateY(-1px);
+}
+
+.identity__cta:focus-visible {
+  outline: 2px solid rgba(255,255,255,.6);
+  outline-offset: 3px;
+}
+
 .domain {
   position: fixed;
   z-index: 8;
@@ -280,6 +308,12 @@ h1 {
   .identity p {
     font-size: clamp(.53rem, 2.1vw, .66rem);
     letter-spacing: clamp(.14rem, 1.4vw, .27rem);
+  }
+  .identity__cta {
+    margin-top: clamp(1.4rem, 4vw, 1.9rem);
+    padding: .8em 1.7em;
+    font-size: clamp(.5rem, 2vw, .6rem);
+    letter-spacing: clamp(.11rem, 1.1vw, .2rem);
   }
   .domain {
     right: 50%;

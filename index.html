@@ -29,9 +29,39 @@
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <link rel="manifest" href="./site.webmanifest">
 
-  <link rel="preload" as="image" href="./assets/sky/day-premium-v3.webp" media="(min-width: 761px)">
-  <link rel="preload" as="image" href="./assets/sky/day-premium-v3-mobile.webp" media="(max-width: 760px)">
-  <link rel="stylesheet" href="./style.css?v=20260713-5">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://*.clarity.ms; connect-src 'self' https://*.clarity.ms; font-src 'self'; base-uri 'self'; form-action 'self';">
+  <link rel="preconnect" href="https://www.clarity.ms">
+
+  <!-- Preloads the scene that actually matches the visitor's local time, instead of
+       always preloading "day". Keep the segments below in sync with sky.js. -->
+  <script>
+    (function () {
+      var minute = new Date().getHours() * 60 + new Date().getMinutes();
+      var segments = [
+        [0, 310, 'night', 'night'], [310, 405, 'night', 'dawn'], [405, 495, 'dawn', 'day'],
+        [495, 975, 'day', 'day'], [975, 1060, 'day', 'golden'], [1060, 1150, 'golden', 'dusk'],
+        [1150, 1245, 'dusk', 'night'], [1245, 1440, 'night', 'night']
+      ];
+      var scene = 'day';
+      for (var i = 0; i < segments.length; i++) {
+        var s = segments[i];
+        if (minute >= s[0] && minute < s[1]) {
+          scene = ((minute - s[0]) / (s[1] - s[0])) < 0.5 ? s[2] : s[3];
+          break;
+        }
+      }
+      [['(min-width: 761px)', ''], ['(max-width: 760px)', '-mobile']].forEach(function (pair) {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.media = pair[0];
+        link.href = './assets/sky/' + scene + '-premium-v3' + pair[1] + '.webp';
+        document.head.appendChild(link);
+      });
+    })();
+  </script>
+
+  <link rel="stylesheet" href="./style.css?v=20260809-1">
 
   <script type="application/ld+json">
   {
@@ -109,6 +139,7 @@
       <h1>Guido Kindwerley</h1>
       <div class="identity__line" aria-hidden="true"></div>
       <p>Founder · Pilot · Builder</p>
+      <a class="identity__cta" href="https://wingsburg.com">Visit Wingsburg</a>
     </section>
   </main>
 
@@ -121,7 +152,7 @@
     </style>
   </noscript>
 
-  <script src="./sky.js?v=20260713-5" defer></script>
+  <script src="./sky.js?v=20260715-1" defer></script>
   <script>
     window.addEventListener('load', () => {
       setTimeout(() => {

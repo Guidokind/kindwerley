@@ -139,13 +139,32 @@
     document.documentElement.style.setProperty('--front-cloud-visibility', String(frontCloudVisibility(scene).toFixed(3)));
   }
 
+  let intervalId = null;
+
+  function startLoop() {
+    if (intervalId !== null || forcedTime !== null || forcedScene) return;
+    intervalId = window.setInterval(render, 60_000);
+  }
+
+  function stopLoop() {
+    if (intervalId === null) return;
+    window.clearInterval(intervalId);
+    intervalId = null;
+  }
+
   render();
-  if (forcedTime === null && !forcedScene) window.setInterval(render, 60_000);
+  startLoop();
   mobileQuery.addEventListener?.('change', render);
 
-  window.addEventListener('load', () => {
-    window.setTimeout(() => {
-      Object.keys(files).forEach(scene => preload(fileFor(scene)));
-    }, 900);
-  }, { once: true });
+  // This is a brief-visit landing page, not something meant to keep running
+  // in a background tab. Stop all work (timers, network) while hidden, and
+  // catch up instantly the moment the tab is visible again.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopLoop();
+    } else {
+      render();
+      startLoop();
+    }
+  });
 })();

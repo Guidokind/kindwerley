@@ -19,3 +19,5 @@ A minimalist personal landing page with a cinematic sky that adapts to the visit
 - Structured data for personal identity and professional affiliation
 
 ## Related
+
+- [Wingsburg](https://wingsburg.com) — an operations agent for private aviation.
