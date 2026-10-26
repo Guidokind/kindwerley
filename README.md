@@ -17,10 +17,14 @@ Página personal de Guido Kindwerley, cofundador de Wingsburg y piloto comercial
 - Francés: https://kindwerley.com/fr/
 - Italiano: https://kindwerley.com/it/
 
-El selector superior permite cambiar de idioma sin JavaScript. La dirección principal sigue en inglés; no hay redirecciones automáticas. Cada versión incluye su propio título, descripción, idioma, URL canónica, datos estructurados y enlaces hreflang. El sitemap contiene las cinco versiones.
+El selector superior muestra solo la bandera del idioma actual. Al tocarla, se despliegan los otros cuatro idiomas con sus nombres. Funciona sin JavaScript y con teclado; también se cierra al tocar fuera o pulsar Escape cuando JavaScript está disponible. La dirección principal sigue en inglés; no hay redirecciones automáticas. Cada versión incluye su propio título, descripción, idioma, URL canónica, datos estructurados y enlaces hreflang. El sitemap contiene las cinco versiones.
 
 Se conserva el diseño, los enlaces sociales, Clarity y el cielo animado según la hora local. Los recursos visuales y el CSS/JS se comparten entre todos los idiomas. La imagen para compartir enlaces es común y muestra el cielo original sin texto. El título y la descripción del enlace se muestran en el idioma de la página. Al actualizar el repositorio, eliminar el antiguo preview.jpg (ya no se utiliza).
 
 ## Editar
 
 Modificar el index.html correspondiente para cambiar textos de cada idioma. Los estilos están en style.css y el cielo en sky.js. Los cambios de contenido deben aplicarse también a los metadatos de cada página.
+
+## Contador discreto
+
+Preparado al pie, junto al dominio. Requiere activar el Worker y la base D1 de Cloudflare siguiendo `counter/ACTIVAR-CONTADOR.md`. Permanece oculto hasta conectarlo; no cuenta visitas todavía. Se comparte entre los cinco idiomas.
