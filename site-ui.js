@@ -13,7 +13,7 @@
 
   // Activate the included Cloudflare Worker on this same-origin route.
   // Empty means disabled: no request and no placeholder number.
-  const COUNTER_ENDPOINT = '';
+  const COUNTER_ENDPOINT = '/api/visits';
   if (!COUNTER_ENDPOINT || !/^https?:$/.test(location.protocol)) return;
   async function loadCounter() {
     try {
