@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Guido Kindwerley — Cofondateur de Wingsburg</title>
+  <meta name="description" content="Guido Kindwerley — Cofondateur de Wingsburg et pilote professionnel.">
+  <link rel="alternate" hreflang="en" href="https://kindwerley.com/">
+  <link rel="alternate" hreflang="es" href="https://kindwerley.com/es/">
+  <link rel="alternate" hreflang="pt" href="https://kindwerley.com/pt/">
+  <link rel="alternate" hreflang="fr" href="https://kindwerley.com/fr/">
+  <link rel="alternate" hreflang="it" href="https://kindwerley.com/it/">
+  <link rel="alternate" hreflang="x-default" href="https://kindwerley.com/">
+  <meta name="author" content="Guido Kindwerley">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#061426">
+  <link rel="canonical" href="https://kindwerley.com/fr/">
+
+  <meta property="og:title" content="Guido Kindwerley — Cofondateur de Wingsburg">
+  <meta property="og:description" content="Cofondateur de Wingsburg · Pilote professionnel">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kindwerley.com/fr/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://kindwerley.com/preview.webp">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guido Kindwerley — Cofondateur de Wingsburg">
+  <meta name="twitter:description" content="Cofondateur de Wingsburg · Pilote professionnel">
+  <meta name="twitter:image" content="https://kindwerley.com/preview.webp">
+
+  <link rel="icon" href="../favicon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="any">
+  <link rel="icon" href="../favicon-32x32.png?v=2" type="image/png" sizes="32x32">
+  <link rel="icon" href="../favicon-16x16.png?v=2" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
+  <link rel="manifest" href="../site.webmanifest">
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://*.clarity.ms; connect-src 'self' https://*.clarity.ms; font-src 'self'; base-uri 'self'; form-action 'self';">
+  <link rel="preconnect" href="https://www.clarity.ms">
+
+  <!-- Preloads the scene that actually matches the visitor's local time, instead of
+       always preloading "day". Keep the segments below in sync with sky.js. -->
+  <script>
+    (function () {
+      var minute = new Date().getHours() * 60 + new Date().getMinutes();
+      var segments = [
+        [0, 310, 'night', 'night'], [310, 405, 'night', 'dawn'], [405, 495, 'dawn', 'day'],
+        [495, 975, 'day', 'day'], [975, 1060, 'day', 'golden'], [1060, 1150, 'golden', 'dusk'],
+        [1150, 1245, 'dusk', 'night'], [1245, 1440, 'night', 'night']
+      ];
+      var scene = 'day';
+      for (var i = 0; i < segments.length; i++) {
+        var s = segments[i];
+        if (minute >= s[0] && minute < s[1]) {
+          scene = ((minute - s[0]) / (s[1] - s[0])) < 0.5 ? s[2] : s[3];
+          break;
+        }
+      }
+      [['(min-width: 761px)', ''], ['(max-width: 760px)', '-mobile']].forEach(function (pair) {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.media = pair[0];
+        link.href = '../assets/sky/' + scene + '-premium-v3' + pair[1] + '.webp';
+        document.head.appendChild(link);
+      });
+    })();
+  </script>
+
+  <link rel="stylesheet" href="../style.css?v=20261026-1">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://kindwerley.com/fr/#profile-page",
+      "url": "https://kindwerley.com/fr/",
+      "name": "Guido Kindwerley — Cofondateur de Wingsburg",
+      "description": "Site personnel de Guido Kindwerley, cofondateur de Wingsburg et pilote professionnel.",
+      "mainEntity": {
+        "@id": "https://kindwerley.com/#guido-kindwerley"
+      },
+      "inLanguage": "fr"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://kindwerley.com/#guido-kindwerley",
+      "name": "Guido Alejandro Kindwerley",
+      "alternateName": "Guido Kindwerley",
+      "url": "https://kindwerley.com/",
+      "description": "Cofondateur de Wingsburg et pilote professionnel.",
+      "jobTitle": [
+        "Cofondateur de Wingsburg",
+        "Pilote professionnel"
+      ],
+      "worksFor": {
+        "@id": "https://wingsburg.com/#organization"
+      },
+      "sameAs": [
+        "https://github.com/Guidokind",
+        "https://www.instagram.com/guidokind/",
+        "https://x.com/guidokind",
+        "https://www.linkedin.com/in/guidokind/"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://wingsburg.com/#organization",
+      "name": "Wingsburg",
+      "url": "https://wingsburg.com/",
+      "description": "Un agent opérationnel pour l’aviation privée.",
+      "founder": {
+        "@id": "https://kindwerley.com/#guido-kindwerley"
+      }
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <nav class="languages" aria-label="Choisir la langue"><a href="../index.html" lang="en" hreflang="en" aria-label="English" title="English">EN</a><a href="../es/index.html" lang="es" hreflang="es" aria-label="Español" title="Español">ES</a><a href="../pt/index.html" lang="pt" hreflang="pt" aria-label="Português" title="Português">PT</a><a href="../fr/index.html" lang="fr" hreflang="fr" aria-label="Français" title="Français" aria-current="page">FR</a><a href="../it/index.html" lang="it" hreflang="it" aria-label="Italiano" title="Italiano">IT</a></nav>
+
+  <div class="sky" aria-hidden="true">
+    <div class="sky__layer sky__layer--a" id="sky-a"></div>
+    <div class="sky__layer sky__layer--b" id="sky-b"></div>
+
+    <div class="sky__stars sky__stars--one"></div>
+    <div class="sky__stars sky__stars--two"></div>
+
+    <div class="sky__clouds sky__clouds--back">
+      <div class="sky__cloud-track sky__cloud-track--one"></div>
+      <div class="sky__cloud-track sky__cloud-track--two"></div>
+    </div>
+
+    <div class="sky__clouds sky__clouds--front">
+      <div class="sky__cloud-track sky__cloud-track--one"></div>
+      <div class="sky__cloud-track sky__cloud-track--two"></div>
+    </div>
+
+    <div class="sky__veil"></div>
+    <div class="sky__grain"></div>
+  </div>
+
+  <main class="hero" aria-label="Guido Kindwerley">
+    <section class="identity">
+      <h1>Guido Kindwerley</h1>
+      <div class="identity__line" aria-hidden="true"></div>
+      <p>Fondateur · Pilote</p>
+      <a class="identity__cta" href="https://wingsburg.com">Découvrir Wingsburg</a>
+    </section>
+  </main>
+
+  <div class="domain" aria-hidden="true">Kindwerley.com</div>
+
+  <nav class="social" aria-label="Réseaux sociaux">
+    <a class="social__link" href="https://www.linkedin.com/in/guidokind/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="3"/>
+        <line x1="7.5" y1="10" x2="7.5" y2="17"/>
+        <circle cx="7.5" cy="6.7" r="0.9" fill="currentColor" stroke="none"/>
+        <path d="M11.5 17v-4.2c0-1.6 1-2.6 2.4-2.6 1.3 0 2.1.9 2.1 2.6V17"/>
+        <line x1="11.5" y1="10" x2="11.5" y2="17"/>
+      </svg>
+    </a>
+    <a class="social__link" href="https://www.instagram.com/guidokind/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="5"/>
+        <circle cx="12" cy="12" r="4.2"/>
+        <circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+  </nav>
+
+  <noscript>
+    <style>
+      .sky__layer--a { background-image: url('../assets/sky/day-premium-v3.webp'); opacity: 1; }
+      .sky__layer--b, .sky__stars, .sky__clouds { display: none; }
+    </style>
+  </noscript>
+
+  <script src="../sky.js?v=20261026-1" defer></script>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','xf5injvym0');
+      }, 1200);
+    }, { once: true });
+  </script>
+</body>
+</html>

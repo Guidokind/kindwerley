@@ -3,7 +3,7 @@
 
   const layers = [document.getElementById('sky-a'), document.getElementById('sky-b')];
   const mobileQuery = window.matchMedia('(max-width: 760px)');
-  const base = './assets/sky/';
+  const base = new URL('./assets/sky/', document.currentScript.src).href;
   const files = {
     dawn: 'dawn-premium-v3',
     day: 'day-premium-v3',

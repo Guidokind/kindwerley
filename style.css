@@ -377,3 +377,10 @@ h1 {
 
   .sky__layer { transform: scale(1.02); transition-duration: .15s; }
 }
+
+/* Language navigation: ordinary links also work without JavaScript. */
+.languages { position: fixed; z-index: 9; top: max(20px, env(safe-area-inset-top)); right: max(20px, env(safe-area-inset-right)); display: flex; padding: 3px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(6,20,38,.55); }
+.languages a { display: grid; place-items: center; min-width: 40px; min-height: 40px; color: rgba(255,255,255,.8); text-decoration: none; font-size: 10px; letter-spacing: .1em; border-radius: 50%; }
+.languages a[aria-current="page"], .languages a:hover { background: rgba(255,255,255,.15); color: #fff; }
+.languages a:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+@media (max-width: 760px) { .languages { top: max(16px, env(safe-area-inset-top)); right: max(16px, env(safe-area-inset-right)); } }
