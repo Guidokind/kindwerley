@@ -130,9 +130,15 @@
       }
     });
 
+    const firstRender = !document.documentElement.hasAttribute('data-sky-ready');
     layers[0].style.opacity = String(1 - scene.mix);
     layers[1].style.opacity = String(scene.mix);
 
+    if (firstRender) {
+      // Commit the initial opacity without the 1.8-second fade-in.
+      void layers[0].offsetWidth;
+      document.documentElement.setAttribute('data-sky-ready', '');
+    }
     document.documentElement.dataset.sky = dominantLabel(scene);
     document.documentElement.style.setProperty('--star-visibility', String(starVisibility(scene).toFixed(3)));
     document.documentElement.style.setProperty('--back-cloud-visibility', String(backCloudVisibility(scene).toFixed(3)));

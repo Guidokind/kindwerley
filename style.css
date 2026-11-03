@@ -411,3 +411,6 @@ h1 {
 .privacy-link { color:var(--dim); font-size:9px; text-decoration:none; }
 .privacy-link:hover, .privacy-link:focus-visible { color:var(--white); text-decoration:underline; }
 @media(max-width:760px) { .privacy-link { font-size:8px; } }
+
+/* Show the first loaded sky immediately; animate only subsequent changes. */
+html:not([data-sky-ready]) .sky__layer { transition: none; }
