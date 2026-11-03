@@ -407,6 +407,7 @@ h1 {
 .language-chevron { width:4px; height:4px; border-color:currentColor; opacity:.7; }
 .language-menu { min-width:132px; border-radius:6px; }
 .language-menu a { font-size:12px; }
-.privacy-link { color:inherit; font-size:9px; text-decoration:none; }
+.social { align-items:center; }
+.privacy-link { color:var(--dim); font-size:9px; text-decoration:none; }
 .privacy-link:hover, .privacy-link:focus-visible { color:var(--white); text-decoration:underline; }
 @media(max-width:760px) { .privacy-link { font-size:8px; } }
