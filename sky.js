@@ -12,16 +12,6 @@
     night: 'night-premium-v3'
   };
 
-  const segments = [
-    { start: 0,    end: 310,  from: 'night',  to: 'night' },
-    { start: 310,  end: 405,  from: 'night',  to: 'dawn' },
-    { start: 405,  end: 495,  from: 'dawn',   to: 'day' },
-    { start: 495,  end: 975,  from: 'day',    to: 'day' },
-    { start: 975,  end: 1060, from: 'day',    to: 'golden' },
-    { start: 1060, end: 1150, from: 'golden', to: 'dusk' },
-    { start: 1150, end: 1245, from: 'dusk',   to: 'night' },
-    { start: 1245, end: 1440, from: 'night',  to: 'night' }
-  ];
 
   const params = new URLSearchParams(window.location.search);
   const forcedScene = params.get('scene');
@@ -45,25 +35,6 @@
   function smoothstep(value) {
     const t = clamp(value, 0, 1);
     return t * t * (3 - 2 * t);
-  }
-
-  function currentMinute() {
-    if (forcedTime !== null) return forcedTime;
-    const now = new Date();
-    return now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
-  }
-
-  function sceneAt(minute) {
-    if (forcedScene && files[forcedScene]) {
-      return { from: forcedScene, to: forcedScene, mix: 0 };
-    }
-    const segment = segments.find(item => minute >= item.start && minute < item.end) || segments[0];
-    if (segment.from === segment.to) return { from: segment.from, to: segment.to, mix: 0 };
-    return {
-      from: segment.from,
-      to: segment.to,
-      mix: smoothstep((minute - segment.start) / (segment.end - segment.start))
-    };
   }
 
   function fileFor(scene) {
@@ -119,7 +90,7 @@
   }
 
   async function render() {
-    const scene = sceneAt(currentMinute());
+    const scene = window.SkyClock.scene();
     const urls = [fileFor(scene.from), fileFor(scene.to)];
     await Promise.all(urls.map(preload));
 
@@ -174,3 +145,4 @@
     }
   });
 })();
+
