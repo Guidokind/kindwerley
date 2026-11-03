@@ -17,9 +17,9 @@ Página personal de Guido Kindwerley, cofundador de Wingsburg y piloto comercial
 - Francés: https://kindwerley.com/fr/
 - Italiano: https://kindwerley.com/it/
 
-El selector superior muestra solo la bandera del idioma actual. Al tocarla, se despliegan los otros cuatro idiomas con sus nombres. Funciona sin JavaScript y con teclado; también se cierra al tocar fuera o pulsar Escape cuando JavaScript está disponible. La dirección principal sigue en inglés; no hay redirecciones automáticas. Cada versión incluye su propio título, descripción, idioma, URL canónica, datos estructurados y enlaces hreflang. El sitemap contiene las cinco versiones.
+El selector superior muestra la abreviatura del idioma actual (EN, ES, PT, FR o IT), sin banderas. Al tocarla, se despliegan los otros cuatro idiomas con sus nombres. Funciona sin JavaScript y con teclado; también se cierra al tocar fuera o pulsar Escape cuando JavaScript está disponible. La dirección principal sigue en inglés; no hay redirecciones automáticas. Cada versión incluye su propio título, descripción, idioma, URL canónica, datos estructurados y enlaces hreflang. El sitemap contiene las cinco versiones.
 
-Se conserva el diseño, los enlaces sociales, Clarity y el cielo animado según la hora local. Los recursos visuales y el CSS/JS se comparten entre todos los idiomas. La imagen para compartir enlaces es común y muestra el cielo original sin texto. El título y la descripción del enlace se muestran en el idioma de la página. Al actualizar el repositorio, eliminar el antiguo preview.jpg (ya no se utiliza).
+Se conserva el diseño, los enlaces sociales, Clarity y el cielo animado según la hora local. Los recursos visuales y el CSS/JS se comparten entre todos los idiomas. La imagen para compartir enlaces es común y muestra el cielo original sin texto. El título y la descripción del enlace se muestran en el idioma de la página. Se utiliza preview.webp para compartir enlaces.
 
 ## Editar
 
@@ -27,4 +27,9 @@ Modificar el index.html correspondiente para cambiar textos de cada idioma. Los 
 
 ## Contador discreto
 
-Preparado al pie, junto al dominio. Requiere activar el Worker y la base D1 de Cloudflare siguiendo `counter/ACTIVAR-CONTADOR.md`. Permanece oculto hasta conectarlo; no cuenta visitas todavía. Se comparte entre los cinco idiomas.
+El contador consulta `/api/visits` y se muestra solo cuando el servicio devuelve un total válido. La configuración del Worker y D1 se documenta en `counter/ACTIVAR-CONTADOR.md`; su despliegue se administra en Cloudflare. Se comparte entre los cinco idiomas.
+
+
+## Actualizaciones y privacidad
+
+Al cambiar style.css o site-ui.js, actualizar su parámetro `v` en las cinco páginas para renovar la caché. El aviso bilingüe de privacidad está en privacy.html.

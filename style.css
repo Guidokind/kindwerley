@@ -399,3 +399,14 @@ h1 {
  .site-footer { right: 50%; bottom: max(18px, env(safe-area-inset-bottom)); transform: translateX(50%); gap: 6px; }
  .visit-counter { font-size: 8px; }
 }
+
+/* Quiet text-only language control; preserve a comfortable touch target. */
+.languages summary { min-width:44px; min-height:44px; justify-content:center; gap:6px; padding:8px; border:0; border-radius:4px; background:transparent; color:var(--dim); }
+.language-code { font-size:11px; font-weight:500; letter-spacing:.08em; }
+.languages summary:hover, .languages[open] summary { color:var(--white); }
+.language-chevron { width:4px; height:4px; border-color:currentColor; opacity:.7; }
+.language-menu { min-width:132px; border-radius:6px; }
+.language-menu a { font-size:12px; }
+.privacy-link { color:inherit; font-size:9px; text-decoration:none; }
+.privacy-link:hover, .privacy-link:focus-visible { color:var(--white); text-decoration:underline; }
+@media(max-width:760px) { .privacy-link { font-size:8px; } }
