@@ -31,7 +31,7 @@ fr/index.html	9231 bytes
 index.html	9142 bytes
 it/index.html	9194 bytes
 preview.webp	71594 bytes
-privacy.html	2551 bytes
+privacy.html	4190 bytes
 pt/index.html	9175 bytes
 README.md	2335 bytes
 robots.txt	68 bytes
