@@ -1,6 +1,6 @@
-/* Approximate regional solar sky. Coordinates: IANA tzdb zone.tab (public domain).
+/* Approximate solar scene. Without weather data, use the timezone reference city.
+ * With weather data, the same-origin Worker may provide rounded Cloudflare coordinates.
  * Formula: https://gml.noaa.gov/grad/solcalc/solareqns.PDF
- * Timezone reference cities are not the visitor's precise location. No GPS, IP lookup or storage.
  */
 (() => {
   'use strict';
@@ -45,12 +45,17 @@
     if(m<1200)return blend('golden','dusk',(m-1140)/60);
     return blend('dusk','night',(m-1200)/30);
   }
-  function scene(date = new Date()) {
+  function scene(date = new Date(), pointOverride = null) {
     const params = new URLSearchParams(window.location.search);
     const forced = params.get('scene');
     if(['night','dawn','day','golden','dusk'].includes(forced))return still(forced);
     const time = /^(\d{1,2})(?::(\d{1,2}))?$/.exec(params.get('time') || '');
     if(time && +time[1]<24 && +(time[2]||0)<60){date=new Date(date);date.setHours(+time[1],+(time[2]||0),0,0);}
+    const latitude = Number(pointOverride?.latitude);
+    const longitude = Number(pointOverride?.longitude);
+    if(Number.isFinite(latitude) && latitude>=-90 && latitude<=90 && Number.isFinite(longitude) && longitude>=-180 && longitude<=180){
+      return solarScene(date,[latitude,longitude]);
+    }
     let zone;
     try {zone=Intl.DateTimeFormat().resolvedOptions().timeZone;} catch (_) {}
     return Object.prototype.hasOwnProperty.call(places,zone) ? solarScene(date,places[zone]) : fallback(date);
