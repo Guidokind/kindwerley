@@ -4,10 +4,7 @@ Página personal de Guido Kindwerley, cofundador de Wingsburg y piloto comercial
 
 ## Publicar la actualización
 
-1. Descomprimir el ZIP.
-2. Subir **el contenido** de la carpeta kindwerley-main a la raíz del repositorio existente en GitHub, reemplazando los archivos anteriores. Incluir las carpetas es, pt, fr e it.
-3. Conservar CNAME y la configuración actual de GitHub Pages. No hace falta instalar ni compilar nada.
-4. Esperar a que finalice el despliegue y recargar el sitio con Ctrl+F5.
+El sitio se publica desde la rama `main` con GitHub Pages. Al integrar cambios en esa rama, GitHub actualiza las páginas estáticas; no hace falta instalar dependencias ni compilar.
 
 ## Idiomas
 
@@ -29,7 +26,14 @@ Modificar el index.html correspondiente para cambiar textos de cada idioma. Los 
 
 El contador consulta `/api/visits` y se muestra solo cuando el servicio devuelve un total válido. La configuración del Worker y D1 se documenta en `counter/ACTIVAR-CONTADOR.md`; su despliegue se administra en Cloudflare. Se comparte entre los cinco idiomas.
 
+## Fondos según el clima
+
+Cuando el Worker devuelve condiciones meteorológicas, `sky.js` combina una de las 16 escenas de `assets/sky/weather-v1/` con la franja solar local del dispositivo: noche, amanecer, día o atardecer. La selección consulta MET Norway mediante el Worker existente; no usa una clave de API ni pide permiso de GPS. Cloudflare aporta una ubicación aproximada derivada de la conexión, que el Worker redondea a 0,1° antes de consultar el clima. Si no hay coordenadas, datos o una escena cargable, queda activo el fondo anterior.
+
+Para habilitar el clima real, publicar `counter/worker.mjs` en el Worker existente, conservar el binding D1 `DB` y añadir la ruta `kindwerley.com/api/weather` sin quitar `kindwerley.com/api/visits`. Los pasos completos están en `counter/ACTIVAR-CONTADOR.md`. En una URL de prueba se puede forzar una escena con `?weather=storm&scene=night` (también `clear`, `cloudy` o `rain`, y `dawn`, `day` o `sunset`).
+
+La página de privacidad explica el uso de ubicación aproximada y el origen de datos. El enlace discreto “MET Norway” aparece en el pie mientras se usa clima real. Las escenas ilustran condiciones meteorológicas; no son un pronóstico ni información de seguridad.
 
 ## Actualizaciones y privacidad
 
-Al cambiar style.css o site-ui.js, actualizar su parámetro `v` en las cinco páginas para renovar la caché. El aviso bilingüe de privacidad está en privacy.html.
+Al cambiar `sky.js`, actualizar su parámetro `v` en las cinco páginas y en `privacy.html` para renovar la caché. `tools/sync-inline-css.py` mantiene el CSS compartido en esas seis páginas. El aviso bilingüe de privacidad está en `privacy.html`.

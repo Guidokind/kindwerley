@@ -414,3 +414,26 @@ h1 {
 
 /* Show the first loaded sky immediately; animate only subsequent changes. */
 html:not([data-sky-ready]) .sky__layer { transition: none; }
+
+/* Weather scenes are already composed photographs, so do not layer the
+   synthetic stars/clouds or the slow pan used by the original sky. */
+html[data-weather-mode="true"] .sky__layer {
+  animation: none;
+  filter: none;
+  transform: none;
+  will-change: opacity;
+}
+
+html[data-weather-mode="true"] .sky__stars,
+html[data-weather-mode="true"] .sky__clouds { display: none; }
+
+.weather-credit { font-size: 9px; letter-spacing: .02em; }
+.weather-credit[hidden] { display: none; }
+.weather-credit a { color: inherit; text-decoration: none; }
+.weather-credit a:hover,
+.weather-credit a:focus-visible { color: var(--white); text-decoration: underline; }
+.weather-credit a:focus-visible { outline: 2px solid rgba(255,255,255,.65); outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .weather-credit { font-size: 8px; }
+}
