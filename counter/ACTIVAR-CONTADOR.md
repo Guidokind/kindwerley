@@ -14,7 +14,7 @@ El Worker usa la ubicación aproximada de Cloudflare (`request.cf`) y redondea l
 
 El Worker almacena una respuesta resumida en la caché de borde, respetando la vigencia indicada por el proveedor y con un máximo de una hora. Las coordenadas redondeadas forman parte de la clave de esa caché; no se guardan en D1 ni en almacenamiento persistente. La respuesta al navegador lleva `Cache-Control: no-store`.
 
-El `User-Agent` identifica `kindwerley.com`. El sitio acredita a MET Norway con un enlace discreto cuando usa datos reales y aclara en privacidad que el fondo es una escena ilustrativa derivada de esos datos. Si faltan ubicación, respuesta o imagen, el sitio conserva su cielo calculado localmente.
+El `User-Agent` identifica `kindwerley.com`. La política de privacidad atribuye los datos a MET Norway e incluye un enlace a la licencia CC BY 4.0; el fondo se describe como escena ilustrativa derivada de esos datos. Si faltan ubicación, respuesta o imagen, el sitio conserva su cielo calculado localmente.
 
 El navegador guarda un identificador aleatorio en `sessionStorage`. Se reutiliza durante la sesión y se renueva tras 30 minutos de inactividad entre cargas. Cambiar de idioma no debe duplicar esa visita. La base almacena identificadores y el total, no personas identificadas. No es una medición de visitantes únicos ni incluye protección contra tráfico automatizado.
 

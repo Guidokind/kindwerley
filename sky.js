@@ -17,7 +17,6 @@
   const forcedTime = parseForcedTime(params.get('time'));
   const weatherPreview = parseWeather(params.get('weather'));
   const previewTime = parseWeatherTime(forcedScene);
-  const weatherCredit = document.querySelector('.weather-credit');
   let currentFiles = ['', ''];
   let weatherData = null;
   let lastWeatherCheck = 0;
@@ -110,10 +109,9 @@
     return 'day';
   }
 
-  function setWeatherState(active, showCredit) {
+  function setWeatherState(active) {
     if (active) document.documentElement.dataset.weatherMode = 'true';
     else delete document.documentElement.dataset.weatherMode;
-    if (weatherCredit) weatherCredit.hidden = !showCredit;
   }
 
   async function render() {
@@ -137,7 +135,7 @@
 
     if (weatherCondition && loaded.some(success => !success)) {
       if (weatherData) weatherData = null;
-      setWeatherState(false, false);
+      setWeatherState(false);
       render();
       return;
     }
@@ -159,7 +157,7 @@
       document.documentElement.setAttribute('data-sky-ready', '');
     }
 
-    setWeatherState(Boolean(weatherCondition), Boolean(weatherData) && !weatherPreview);
+    setWeatherState(Boolean(weatherCondition));
     document.documentElement.dataset.sky = weatherCondition
       ? `${weatherCondition}-${dominantLabel(scene)}`
       : dominantLabel(scene);
