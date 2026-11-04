@@ -32,7 +32,7 @@ Cuando el Worker devuelve condiciones meteorológicas, `sky.js` combina una de l
 
 Para habilitar el clima real, publicar `counter/worker.mjs` en el Worker existente, conservar el binding D1 `DB` y añadir la ruta `kindwerley.com/api/weather` sin quitar `kindwerley.com/api/visits`. Los pasos completos están en `counter/ACTIVAR-CONTADOR.md`. En una URL de prueba se puede forzar una escena con `?weather=storm&scene=night` (también `clear`, `cloudy` o `rain`, y `dawn`, `day` o `sunset`).
 
-La página de privacidad explica el uso de ubicación aproximada y el origen de datos. El enlace discreto “MET Norway” aparece en el pie mientras se usa clima real. Las escenas ilustran condiciones meteorológicas; no son un pronóstico ni información de seguridad.
+La página de privacidad explica el uso de ubicación aproximada y atribuye los datos meteorológicos a MET Norway bajo la licencia CC BY 4.0. Las escenas ilustran condiciones meteorológicas; no son un pronóstico ni información de seguridad.
 
 ## Actualizaciones y privacidad
 
