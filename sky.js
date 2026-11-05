@@ -166,24 +166,18 @@
     document.documentElement.style.setProperty('--front-cloud-visibility', String(frontCloudVisibility(localScene).toFixed(3)));
   }
 
-  async function refreshWeather() {
+  async function loadWeather(timeoutMs = 5000) {
     if (weatherPreview || document.hidden || !/^https?:$/.test(location.protocol)) return;
     lastWeatherCheck = Date.now();
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 5000);
-      let response;
-      try {
-        response = await fetch('/api/weather', {
-          headers: { Accept: 'application/json' },
-          cache: 'no-store',
-          credentials: 'omit',
-          signal: controller.signal
-        });
-      } finally {
-        window.clearTimeout(timeout);
-      }
-
+      const response = await fetch('/api/weather', {
+        headers: { Accept: 'application/json' },
+        cache: 'no-store',
+        credentials: 'omit',
+        signal: controller.signal
+      });
       const result = response.ok ? await response.json() : null;
       const latitude = Number(result?.location?.latitude);
       const longitude = Number(result?.location?.longitude);
@@ -194,13 +188,19 @@
         : null;
     } catch (_) {
       weatherData = null;
+    } finally {
+      window.clearTimeout(timeout);
     }
-    render();
+  }
+
+  async function refreshWeather() {
+    await loadWeather();
+    await render();
     if (!document.hidden) weatherTimer = window.setTimeout(refreshWeather, 30 * 60 * 1000);
   }
 
   function startLoop() {
-    if (intervalId !== null || forcedTime !== null || forcedScene) return;
+    if (intervalId !== null || document.hidden || forcedTime !== null || forcedScene) return;
     intervalId = window.setInterval(render, 60_000);
   }
 
@@ -215,9 +215,20 @@
     }
   }
 
-  render();
-  refreshWeather();
-  startLoop();
+  async function initialize() {
+    // Let the weather endpoint answer before the first background is painted.
+    // The short deadline keeps the original local sky as a quick fallback.
+    if (!weatherPreview && !document.hidden && /^https?:$/.test(location.protocol)) {
+      await loadWeather(1500);
+    }
+    await render();
+    startLoop();
+    if (!weatherPreview && !document.hidden && /^https?:$/.test(location.protocol)) {
+      weatherTimer = window.setTimeout(refreshWeather, 30 * 60 * 1000);
+    }
+  }
+
+  initialize();
   mobileQuery.addEventListener?.('change', render);
 
   // This is a brief-visit landing page, not something meant to keep running
@@ -228,7 +239,7 @@
     } else {
       render();
       startLoop();
-      if (Date.now() - lastWeatherCheck >= 30 * 60 * 1000) refreshWeather();
+      if (!weatherData || Date.now() - lastWeatherCheck >= 30 * 60 * 1000) refreshWeather();
       else if (!weatherPreview && weatherTimer === null) weatherTimer = window.setTimeout(refreshWeather, 30 * 60 * 1000 - (Date.now() - lastWeatherCheck));
     }
   });
