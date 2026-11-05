@@ -2,6 +2,7 @@
   'use strict';
 
   const layers = [document.getElementById('sky-a'), document.getElementById('sky-b')];
+  const loadingOverlay = document.getElementById('sky-loading');
   const mobileQuery = window.matchMedia('(max-width: 760px)');
   const base = new URL('./assets/sky/', document.currentScript.src).href;
   const files = {
@@ -136,8 +137,7 @@
     if (weatherCondition && loaded.some(success => !success)) {
       if (weatherData) weatherData = null;
       setWeatherState(false);
-      render();
-      return;
+      return render();
     }
 
     urls.forEach((url, index) => {
@@ -215,26 +215,35 @@
     }
   }
 
+  function dismissLoadingOverlay() {
+    if (!loadingOverlay) return;
+    loadingOverlay.classList.add('sky-loading--hidden');
+    window.setTimeout(() => loadingOverlay.remove(), 500);
+  }
+
   async function initialize() {
     const canFetchWeather = !weatherPreview && !document.hidden && /^https?:$/.test(location.protocol);
-    if (!canFetchWeather) {
+
+    if (canFetchWeather && loadingOverlay) {
+      // Keep the loading screen up while weather is selected and its image loads.
+      await loadWeather(2000);
       await render();
-      startLoop();
-      return;
+    } else {
+      // Pages without the landing-screen loader keep their local sky visible
+      // while requesting weather in the background.
+      const initialScene = render();
+      const weatherRequest = canFetchWeather ? loadWeather(1500) : null;
+      await initialScene;
+      if (weatherRequest) {
+        await weatherRequest;
+        if (weatherData) await render();
+      }
     }
 
-    // Paint the local-time sky while the weather request runs in parallel.
-    // Wait for this first render before a fast response can replace it; otherwise
-    // the page can stay blue until the weather image finishes loading.
-    const initialScene = render();
-    const weatherRequest = loadWeather(1500);
     startLoop();
+    dismissLoadingOverlay();
 
-    await initialScene;
-    await weatherRequest;
-    if (weatherData) await render();
-
-    if (!document.hidden) {
+    if (canFetchWeather) {
       weatherTimer = window.setTimeout(refreshWeather, 30 * 60 * 1000);
     }
   }
