@@ -216,14 +216,25 @@
   }
 
   async function initialize() {
-    // Let the weather endpoint answer before the first background is painted.
-    // The short deadline keeps the original local sky as a quick fallback.
-    if (!weatherPreview && !document.hidden && /^https?:$/.test(location.protocol)) {
-      await loadWeather(1500);
+    const canFetchWeather = !weatherPreview && !document.hidden && /^https?:$/.test(location.protocol);
+    if (!canFetchWeather) {
+      await render();
+      startLoop();
+      return;
     }
-    await render();
+
+    // Paint the local-time sky while the weather request runs in parallel.
+    // Wait for this first render before a fast response can replace it; otherwise
+    // the page can stay blue until the weather image finishes loading.
+    const initialScene = render();
+    const weatherRequest = loadWeather(1500);
     startLoop();
-    if (!weatherPreview && !document.hidden && /^https?:$/.test(location.protocol)) {
+
+    await initialScene;
+    await weatherRequest;
+    if (weatherData) await render();
+
+    if (!document.hidden) {
       weatherTimer = window.setTimeout(refreshWeather, 30 * 60 * 1000);
     }
   }
