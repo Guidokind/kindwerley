@@ -118,7 +118,7 @@
 .sky-loading__ring { position:relative; display:grid; place-items:center; width:40px; height:40px; border:1px solid rgba(255,255,255,.16); border-top-color:rgba(255,255,255,.9); border-right-color:rgba(255,255,255,.48); border-radius:50%; box-shadow:0 0 26px rgba(100,168,255,.12); animation:sky-loading-rotate 1.15s linear infinite; }
 .sky-loading__ring::before { content:""; position:absolute; inset:7px; border:1px solid rgba(255,255,255,.1); border-bottom-color:rgba(255,255,255,.34); border-radius:50%; animation:sky-loading-rotate .9s linear infinite reverse; }
 .sky-loading__dot { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,.94); box-shadow:0 0 14px rgba(141,194,255,.75); animation:sky-loading-pulse 1.4s ease-in-out infinite; }
-.sky-loading__label { font-size:8px; font-weight:550; letter-spacing:.26em; text-transform:uppercase; color:rgba(255,255,255,.62); }
+
 .sky-loading--hidden { opacity:0; visibility:hidden; transition:opacity .42s ease, visibility 0s linear .42s; }
 @keyframes sky-loading-rotate { to { transform:rotate(1turn); } }
 @keyframes sky-loading-pulse { 0%,100% { opacity:.5; transform:scale(.82); } 50% { opacity:1; transform:scale(1.2); } }
@@ -178,7 +178,7 @@
 <body>
   <details class="languages"><summary aria-label="Choose language: English" title="Choose language"><span class="language-code">EN</span><span class="language-chevron" aria-hidden="true"></span></summary><nav class="language-menu" aria-label="Choose language"><a href="./es/index.html" lang="es" hreflang="es"><span>Español</span></a><a href="./pt/index.html" lang="pt" hreflang="pt"><span>Português</span></a><a href="./fr/index.html" lang="fr" hreflang="fr"><span>Français</span></a><a href="./it/index.html" lang="it" hreflang="it"><span>Italiano</span></a></nav></details>
 
-  <div class="sky-loading" id="sky-loading" role="status" aria-label="Loading sky"><div class="sky-loading__content"><span class="sky-loading__ring" aria-hidden="true"><span class="sky-loading__dot"></span></span><span class="sky-loading__label" aria-hidden="true">Loading sky</span></div></div>
+  <div class="sky-loading" id="sky-loading" role="status" aria-label="Loading sky"><div class="sky-loading__content"><span class="sky-loading__ring" aria-hidden="true"><span class="sky-loading__dot"></span></span></div></div>
 
   <div class="sky" aria-hidden="true">
     <div class="sky__layer sky__layer--a" id="sky-a"></div>
